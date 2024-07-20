@@ -6,12 +6,14 @@ import FavoritesScreen from './pages/favorites-screen';
 import OfferScreen from './pages/offer-sreen';
 import NotFoundScreen from './pages/not-found-sreen';
 import PrivateRoute from './private-route/private-route';
+import NoAuthRoute from './no-auth-route/no-auth-route';
 
 type AppProps = {
   placesCount: number;
 }
 
 function App({placesCount}: AppProps): JSX.Element {
+  const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
   return (
     <BrowserRouter>
       <Routes>
@@ -21,13 +23,19 @@ function App({placesCount}: AppProps): JSX.Element {
         />
         <Route
           path = {AppRoute.Login}
-          element = {<LoginScreen />}
+          element = {
+            <NoAuthRoute
+              authorizationStatus={AuthStatus}
+            >
+              <LoginScreen />
+            </NoAuthRoute>
+          }
         />
         <Route
           path = {AppRoute.Favorites}
           element = {
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthStatus}
             >
               <FavoritesScreen />
             </PrivateRoute>
