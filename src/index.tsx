@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app';
+import App from './components/app/app';
 import { mockOffers } from './mocks/offers';
 
 const PLACES_COUNT = 777;
