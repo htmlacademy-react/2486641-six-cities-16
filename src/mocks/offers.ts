@@ -41,7 +41,7 @@ export const mockOffers = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 2.5
   },

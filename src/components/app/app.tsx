@@ -14,14 +14,14 @@ type AppProps = {
   offers: typeof mockOffers;
 }
 
-function App({placesCount}: AppProps): JSX.Element {
+function App({placesCount, offers}: AppProps): JSX.Element {
   const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path = {AppRoute.Main}
-          element = {<MainScreen placesCount={placesCount} />}
+          element = {<MainScreen placesCount={placesCount} offers={offers} />}
         />
         <Route
           path = {AppRoute.Login}

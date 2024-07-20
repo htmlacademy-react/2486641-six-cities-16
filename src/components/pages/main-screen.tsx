@@ -1,10 +1,12 @@
-import PlaceCard from '../place-card';
+import { mockOffers } from '../../mocks/offers';
+import PlaceCard from '../place-card/place-card';
 
 type MainScreenProps = {
   placesCount: number;
+  offers: typeof mockOffers;
 }
 
-function MainScreen({placesCount}: MainScreenProps): JSX.Element {
+function MainScreen({placesCount, offers}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,11 +97,11 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <PlaceCard offer={offers[0]}/>
+                <PlaceCard offer={offers[1]}/>
+                <PlaceCard offer={offers[2]}/>
+                <PlaceCard offer={offers[3]}/>
+                <PlaceCard offer={offers[4]}/>
               </div>
             </section>
             <div className="cities__right-section">
