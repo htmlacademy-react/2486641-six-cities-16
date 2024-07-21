@@ -3,11 +3,15 @@ import PremiumMark from './premium-mark';
 
 type PlaceCardProps = {
   offer: typeof mockOffers[0];
+  handleMouseOver: any;
 }
 
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, handleMouseOver}: PlaceCardProps): JSX.Element {
   return(
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOver={handleMouseOver(offer.id)}
+    >
       {offer.isPremium && <PremiumMark />}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">

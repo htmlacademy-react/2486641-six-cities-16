@@ -7,21 +7,20 @@ import OfferScreen from '../pages/offer-screen';
 import NotFoundScreen from '../pages/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
-import { mockOffers } from '../../mocks/offers';
+import { Offers } from '../../types';
 
 type AppProps = {
-  placesCount: number;
-  offers: typeof mockOffers;
+  offers: Offers;
 }
 
-function App({placesCount, offers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path = {AppRoute.Main}
-          element = {<MainScreen placesCount={placesCount} offers={offers} />}
+          element = {<MainScreen offers={offers} />}
         />
         <Route
           path = {AppRoute.Login}

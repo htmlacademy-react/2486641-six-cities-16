@@ -1,4 +1,6 @@
-export const mockOffers = [
+import { Offers } from '../types';
+
+const mockOffers = [
   {
     'id': '38f33a49-572b-4199-8fac-b09c90206562',
     'title': 'Tile House',
@@ -2760,3 +2762,8 @@ export const mockOffers = [
     'rating': 4.3
   }
 ];
+
+
+const getOffers = (): Offers => mockOffers;
+
+export default getOffers;

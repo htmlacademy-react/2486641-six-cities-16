@@ -1,12 +1,11 @@
-import { mockOffers } from '../../mocks/offers';
-import PlaceCard from '../place-card/place-card';
+import { Offers } from '../../types';
+import PlaceList from '../place-list/place-list';
 
 type MainScreenProps = {
-  placesCount: number;
-  offers: typeof mockOffers;
+  offers: Offers;
 }
 
-function MainScreen({placesCount, offers}: MainScreenProps): JSX.Element {
+function MainScreen({offers}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -80,7 +79,7 @@ function MainScreen({placesCount, offers}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -96,13 +95,7 @@ function MainScreen({placesCount, offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard offer={offers[0]}/>
-                <PlaceCard offer={offers[1]}/>
-                <PlaceCard offer={offers[2]}/>
-                <PlaceCard offer={offers[3]}/>
-                <PlaceCard offer={offers[4]}/>
-              </div>
+              <PlaceList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
