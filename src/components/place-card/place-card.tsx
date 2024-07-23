@@ -1,16 +1,18 @@
-import { mockOffers } from '../../mocks/offers';
+import { Offer } from '../../types';
 import PremiumMark from './premium-mark';
 
 type PlaceCardProps = {
-  offer: typeof mockOffers[0];
-  handleMouseOver: any;
+  offer: Offer;
+  handleMouseOver: (cardId: any) => void;
 }
 
 function PlaceCard({offer, handleMouseOver}: PlaceCardProps): JSX.Element {
   return(
     <article
       className="cities__card place-card"
-      onMouseOver={handleMouseOver(offer.id)}
+      onMouseOver={(evt) => {
+        handleMouseOver(evt.target);
+      }}
     >
       {offer.isPremium && <PremiumMark />}
       <div className="cities__image-wrapper place-card__image-wrapper">
