@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import getOffers from './mocks/offers';
+import { mockOffers } from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const offers = getOffers();
+const offers = mockOffers;
 
 root.render(
   <React.StrictMode>

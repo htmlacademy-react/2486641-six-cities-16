@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PlaceCard from '../place-card/place-card';
-import { Offers } from '../../types';
+import { Offer, Offers } from '../../types';
 
 type PlaceListProps = {
   offers: Offers;
 }
 
 function PlaceList({offers}: PlaceListProps): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState(null);
-  console.log(activeCardId);
+  const [activeCardId, setActiveCardId] = useState<Offer['id'] | null>(null);
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((item) => (
-        <React.Fragment key={item.id}>
-          <PlaceCard key={item.id} offer={item} handleMouseOver={setActiveCardId}/>
-        </React.Fragment>
+        <PlaceCard key={item.id} offer={item} handleMouseOver={setActiveCardId}/>
       ))}
     </div>
   );
