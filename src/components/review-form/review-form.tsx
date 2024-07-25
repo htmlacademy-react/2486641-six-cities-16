@@ -3,7 +3,11 @@ import { Stars } from '../../const';
 
 function ReviewForm(): JSX.Element {
   const [review, setReview] = useState({rating: 0, text: ''});
-  const onRatingChange = (evt: React.FormEvent<HTMLInputElement>): void => setReview({...review, rating: evt.target.value as number});
+  const onRatingChange = (evt: React.FormEvent): void => {
+    if (evt.target instanceof HTMLInputElement) {
+      setReview({...review, rating: Number(evt.target.value)});
+    }
+  };
   const onTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => setReview({...review, text: evt.target.value});
   return (
     <form className="reviews__form form" action="#" method="post">

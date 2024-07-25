@@ -9,7 +9,7 @@ type PlaceListProps = {
 function PlaceList({offers}: PlaceListProps): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<Offer['id'] | null>(null);
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" key={activeCardId}>
       {offers.map((item) => (
         <PlaceCard key={item.id} offer={item} handleMouseOver={setActiveCardId}/>
       ))}
