@@ -2274,7 +2274,7 @@ export const mockOffers: Offers = [
       'longitude': 9.980654000000001,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 3.7
   },
@@ -2642,7 +2642,7 @@ export const mockOffers: Offers = [
       'longitude': 6.763314,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 2
   },
@@ -2757,7 +2757,7 @@ export const mockOffers: Offers = [
       'longitude': 6.784314,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.2
   }
@@ -2766,3 +2766,5 @@ export const mockOffers: Offers = [
 // export function getOfferById(id: Offer['id']): Offer | undefined {
 //   return mockOffers.find((element) => element.id === id);
 // }
+
+export const getFavoriteOffers = (): Offers => mockOffers.filter((offer) => offer.isFavorite);

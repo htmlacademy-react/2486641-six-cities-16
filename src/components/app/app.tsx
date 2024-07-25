@@ -12,9 +12,10 @@ import Layout from '../layout/layout';
 
 type AppProps = {
   offers: Offers;
+  favoriteOffers: Offers;
 }
 
-function App({offers}: AppProps): JSX.Element {
+function App({offers, favoriteOffers}: AppProps): JSX.Element {
   const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
   return (
     <BrowserRouter>
@@ -43,7 +44,7 @@ function App({offers}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthStatus}
               >
-                <FavoritesScreen />
+                <FavoritesScreen favoriteOffers={favoriteOffers}/>
               </PrivateRoute>
             }
           />
