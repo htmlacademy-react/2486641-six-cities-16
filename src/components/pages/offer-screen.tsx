@@ -2,12 +2,18 @@ import { useParams } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { OfferInfo } from '../../types.ts';
 import { getOfferInfoById } from '../../mocks/offers-info.ts';
+import NotFoundScreen from './not-found-screen.tsx';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();
   let offer: OfferInfo | undefined = undefined;
   if (params.id) {
     offer = getOfferInfoById(params.id);
+  }
+  if (!offer) {
+    return (
+      <NotFoundScreen />
+    )
   }
   return(
     <div className="page">
@@ -50,44 +56,44 @@ function OfferScreen(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium &&
+              {offer.isPremium &&
               <div className="offer__mark">
                 <span>Premium</span>
               </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {offer?.title}
+                  {offer.title}
                 </h1>
-                <button className={`offer__bookmark-button button ${offer?.isFavorite && 'offer__bookmark-button--active button'}`} type="button">
+                <button className={`offer__bookmark-button button ${offer.isFavorite && 'offer__bookmark-button--active button'}`} type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
+                  <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
                 </button>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: `${(offer?.rating) ? offer.rating * 20 : 0}%`}}></span>
+                  <span style={{width: `${(offer.rating) ? offer.rating * 20 : 0}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{offer?.rating}</span>
+                <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {/* TODO: С заглавной буквы */}
-                  {offer?.type}
+                  {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {/* TODO: Bedroom/Bedrooms */}
-                  {offer?.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
                   {/* TODO: adult/adults */}
-                  Max {offer?.maxAdults} adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer?.price}</b>
+                <b className="offer__price-value">&euro;{offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -103,23 +109,23 @@ function OfferScreen(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className={`offer__avatar-wrapper ${offer?.host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                    <img className="offer__avatar user__avatar" src={offer?.host.avatarUrl} width="74" height="74" alt="Host avatar"></img>
+                  <div className={`offer__avatar-wrapper ${offer.host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
+                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"></img>
                   </div>
                   <span className="offer__user-name">
-                    {offer?.host.name}
+                    {offer.host.name}
                   </span>
-                  {offer?.host.isPro &&
+                  {offer.host.isPro &&
                     <span className="offer__user-status">
                       Pro
                     </span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    {offer?.title}
+                    {offer.title}
                   </p>
                   <p className="offer__text">
-                    {offer?.description}
+                    {offer.description}
                   </p>
                 </div>
               </div>
