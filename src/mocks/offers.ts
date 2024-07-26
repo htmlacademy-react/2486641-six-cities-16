@@ -1382,29 +1382,6 @@ export const mockOffers: Offers = [
     'rating': 3.6
   },
   {
-    'id': 'e30234d1-8d33-4f99-9d87-37d8477e4640',
-    'title': 'Penthouse, 4-5 rooms + 5 balconies',
-    'type': 'hotel',
-    'price': 113,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
-    'city': {
-      'name': 'Amsterdam',
-      'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 52.36554,
-      'longitude': 4.911976,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': true,
-    'rating': 2.9
-  },
-  {
     'id': '7593808c-13bf-484e-b869-fdd1b6c0e457',
     'title': 'House in countryside',
     'type': 'room',
@@ -2739,6 +2716,29 @@ export const mockOffers: Offers = [
     'rating': 4.4
   },
   {
+    'id': 'e30234d1-8d33-4f99-9d87-37d8477e4640',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'hotel',
+    'price': 113,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 52.36554,
+      'longitude': 4.911976,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 2.9
+  },
+  {
     'id': '90e95a7b-9ffe-4c00-874b-8e1c63b4bc00',
     'title': 'Tile House',
     'type': 'hotel',
@@ -2763,8 +2763,16 @@ export const mockOffers: Offers = [
   }
 ];
 
-// export function getOfferById(id: Offer['id']): Offer | undefined {
-//   return mockOffers.find((element) => element.id === id);
-// }
+export const getFavoriteOffers = (): Offers => mockOffers.filter((offer) => offer.isFavorite).sort((offer1, offer2) => (offer1.city.name > offer2.city.name) ? 1 : -1);
 
-export const getFavoriteOffers = (): Offers => mockOffers.filter((offer) => offer.isFavorite);
+export const getOffersByCity = (offers: Offers) => {
+  const offersByCity: {city: string; offers: Offers}[] = [];
+  let cityName: string = '';
+  offers.map((offer) => {
+    if (offer.city.name !== cityName) {
+      offersByCity.push({city: offer.city.name, offers: offers.filter((item) => item.city.name === offer.city.name)});
+    }
+    cityName = offer.city.name;
+  });
+  return offersByCity;
+};

@@ -1,3 +1,4 @@
+import { CardDisplayMode } from '../../const';
 import { Offers } from '../../types';
 import PlaceList from '../place-list/place-list';
 
@@ -65,7 +66,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlaceList offers={offers}/>
+            <PlaceList offers={offers} displayMode={CardDisplayMode.city}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

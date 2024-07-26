@@ -1,27 +1,29 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
 import PremiumMark from './premium-mark';
-import { AppRoute } from '../../const';
+import { AppRoute, CardDisplayMode, CardSettings } from '../../const';
 
 type PlaceCardProps = {
   offer: Offer;
   handleMouseOver: (cardId: Offer['id'] | null) => void;
+  displayMode: CardDisplayMode;
 }
 
-function PlaceCard({offer, handleMouseOver}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, handleMouseOver, displayMode}: PlaceCardProps): JSX.Element {
+  const {cardClass, imgDivClass, imgWidth, imgHeight, infoClass} = CardSettings[displayMode];
   return(
     <article
-      className="cities__card place-card"
+      className={cardClass}
       onMouseEnter={() => handleMouseOver(offer.id)}
       onMouseLeave={() => handleMouseOver(null)}
     >
       {offer.isPremium && <PremiumMark />}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imgDivClass}>
         <Link to={AppRoute.Offer.replace(':id', offer.id)}>
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"></img>
+          <img className="place-card__image" src={offer.previewImage} width={imgWidth} height={imgHeight} alt="Place image"></img>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={infoClass}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
