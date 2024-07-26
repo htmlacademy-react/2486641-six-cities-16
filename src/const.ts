@@ -42,3 +42,26 @@ export const CardListClass = {
   [CardDisplayMode.city]: 'cities__places-list places__list tabs__content',
   [CardDisplayMode.favorite]: 'favorites__places'
 };
+
+
+export enum LogoDisplayMode {
+  header,
+  footer
+}
+
+export const LogoSettings = {
+  [LogoDisplayMode.header]:
+    {
+      linkClass: 'header__logo-link',
+      imgClass: 'header__logo',
+      imgWidth: '81',
+      imgHeight: '41',
+    },
+  [LogoDisplayMode.footer]:
+    {
+      linkClass: 'footer__logo-link',
+      imgClass: 'footer__logo',
+      imgWidth: '64',
+      imgHeight: '33',
+    },
+};

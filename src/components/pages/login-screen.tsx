@@ -1,3 +1,4 @@
+import { LogoDisplayMode } from '../../const';
 import Logo from '../logo/logo';
 
 function LoginScreen(): JSX.Element {
@@ -6,7 +7,9 @@ function LoginScreen(): JSX.Element {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-            <Logo />
+            <div className="header__left">
+              <Logo displayMode={LogoDisplayMode.header}/>
+            </div>
           </div>
         </div>
       </header>
