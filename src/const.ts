@@ -12,7 +12,23 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const Stars = [5, 4, 3, 2, 1];
+export const Stars = [
+  {value: 5,
+    title: 'perfect'
+  },
+  {value: 4,
+    title: 'good'
+  },
+  {value: 3,
+    title: 'not bad'
+  },
+  {value: 2,
+    title: 'badly'
+  },
+  {value: 1,
+    title: 'terribly'
+  },
+];
 
 export enum CardDisplayMode {
   city,
@@ -64,4 +80,22 @@ export const LogoSettings = {
       imgWidth: '64',
       imgHeight: '33',
     },
+};
+
+export enum BookmarkButtonDisplayMode {
+  placeCard,
+  offer
+}
+
+export const BookmarkButtonSettings = {
+  [BookmarkButtonDisplayMode.offer]: {
+    classPrefix: 'offer',
+    imgWidth: 31,
+    imgHeight: 33
+  },
+  [BookmarkButtonDisplayMode.placeCard]: {
+    classPrefix: 'place-card',
+    imgWidth: 18,
+    imgHeight: 19
+  },
 };

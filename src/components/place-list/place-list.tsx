@@ -9,9 +9,9 @@ type PlaceListProps = {
 }
 
 function PlaceList({offers, displayMode}: PlaceListProps): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState<Offer['id'] | null>(null);
+  const [, setActiveCardId] = useState<Offer['id'] | null>(null);
   return (
-    <div className={CardListClass[displayMode]} key={activeCardId}>
+    <div className={CardListClass[displayMode]}>
       {offers.map((item) => (
         <PlaceCard key={item.id} offer={item} onMouseOver={setActiveCardId} displayMode={displayMode}/>
       ))}

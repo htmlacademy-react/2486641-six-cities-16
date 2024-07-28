@@ -3,6 +3,8 @@ import { OfferInfo } from '../../types.ts';
 import NotFoundScreen from './not-found-screen.tsx';
 import ReviewForm from '../review-form/review-form.tsx';
 import { getOfferInfoById } from '../../utils.ts';
+import BookmarkButton from '../bookmark-button/bookmark-button.tsx';
+import { BookmarkButtonDisplayMode } from '../../const.ts';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();
@@ -37,12 +39,7 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <button className={`offer__bookmark-button button ${offer.isFavorite && 'offer__bookmark-button--active button'}`} type="button">
-                <svg className="offer__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-              </button>
+              <BookmarkButton displayMode={BookmarkButtonDisplayMode.offer} isFavorite={offer.isFavorite} />
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
