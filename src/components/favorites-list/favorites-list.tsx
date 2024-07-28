@@ -1,6 +1,6 @@
 import { CardDisplayMode } from '../../const';
-import { getOffersByCity } from '../../mocks/offers';
 import { Offers } from '../../types';
+import { getOffersByCity } from '../../utils';
 import PlaceList from '../place-list/place-list';
 
 type FavoritesListProps = {

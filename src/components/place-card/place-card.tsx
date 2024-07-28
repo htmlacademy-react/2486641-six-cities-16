@@ -5,17 +5,17 @@ import { AppRoute, CardDisplayMode, CardSettings } from '../../const';
 
 type PlaceCardProps = {
   offer: Offer;
-  handleMouseOver: (cardId: Offer['id'] | null) => void;
+  onMouseOver: (cardId: Offer['id'] | null) => void;
   displayMode: CardDisplayMode;
 }
 
-function PlaceCard({offer, handleMouseOver, displayMode}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, onMouseOver, displayMode}: PlaceCardProps): JSX.Element {
   const {cardClass, imgDivClass, imgWidth, imgHeight, infoClass} = CardSettings[displayMode];
   return(
     <article
       className={cardClass}
-      onMouseEnter={() => handleMouseOver(offer.id)}
-      onMouseLeave={() => handleMouseOver(null)}
+      onMouseEnter={() => onMouseOver(offer.id)}
+      onMouseLeave={() => onMouseOver(null)}
     >
       {offer.isPremium && <PremiumMark />}
       <div className={imgDivClass}>

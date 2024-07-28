@@ -13,7 +13,7 @@ function PlaceList({offers, displayMode}: PlaceListProps): JSX.Element {
   return (
     <div className={CardListClass[displayMode]} key={activeCardId}>
       {offers.map((item) => (
-        <PlaceCard key={item.id} offer={item} handleMouseOver={setActiveCardId} displayMode={displayMode}/>
+        <PlaceCard key={item.id} offer={item} onMouseOver={setActiveCardId} displayMode={displayMode}/>
       ))}
     </div>
   );

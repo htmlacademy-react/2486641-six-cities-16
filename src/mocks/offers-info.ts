@@ -1,4 +1,4 @@
-import { OfferInfo, OffersInfo } from '../types';
+import { OffersInfo } from '../types';
 
 export const mockOffersInfo: OffersInfo = [
   {
@@ -289,4 +289,3 @@ export const mockOffersInfo: OffersInfo = [
   }
 ];
 
-export const getOfferInfoById = (id: OfferInfo['id']): OfferInfo | undefined => mockOffersInfo.find((element) => element.id === id);

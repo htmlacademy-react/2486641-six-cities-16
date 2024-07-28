@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { OfferInfo } from '../../types.ts';
-import { getOfferInfoById } from '../../mocks/offers-info.ts';
 import NotFoundScreen from './not-found-screen.tsx';
 import ReviewForm from '../review-form/review-form.tsx';
+import { getOfferInfoById } from '../../utils.ts';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();

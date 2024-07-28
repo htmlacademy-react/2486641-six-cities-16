@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { getFavoriteOffers, mockOffers } from './mocks/offers';
+import { mockOffers } from './mocks/offers';
+import { getFavoriteOffers } from './utils';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
