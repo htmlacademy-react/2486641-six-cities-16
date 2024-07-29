@@ -1,19 +1,22 @@
 import { mockOffers } from './mocks/offers';
 import { mockOffersInfo } from './mocks/offers-info';
-import { OfferInfo, Offers } from './types';
+import { Offer, OfferInfo, Offers } from './types';
 
-export const getFavoriteOffers = (): Offers => mockOffers.filter((offer) => offer.isFavorite).sort((offer1, offer2) => (offer1.city.name > offer2.city.name) ? 1 : -1);
-
-export const getOffersByCity = (offers: Offers) => {
-  const offersByCity: {city: string; offers: Offers}[] = [];
-  let cityName: string = '';
-  offers.map((offer) => {
-    if (offer.city.name !== cityName) {
-      offersByCity.push({city: offer.city.name, offers: offers.filter((item) => item.city.name === offer.city.name)});
-    }
-    cityName = offer.city.name;
-  });
-  return offersByCity;
+export const getFavoriteOffers = (): Offers => {
+  const res = mockOffers.filter((offer) => offer.isFavorite);
+  return res;
 };
+
+export const getOffersGroupByCity = (offers: Offers) =>
+  offers.reduce((result: {[name: string]: Offers}, offer: Offer) => {
+  // Если свойство не создано, создаем его.
+    if (!Object.prototype.hasOwnProperty.call(result, offer.city.name)){
+      result[offer.city.name] = [];
+    }
+    // Добавление значения в объект
+    result[offer.city.name].push(offer);
+    // Возвращение объекта для следующего шага
+    return result;
+  }, {});
 
 export const getOfferInfoById = (id: OfferInfo['id']): OfferInfo | undefined => mockOffersInfo.find((element) => element.id === id);
