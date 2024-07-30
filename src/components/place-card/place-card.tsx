@@ -6,7 +6,7 @@ import BookmarkButton from '../bookmark-button/bookmark-button';
 
 type PlaceCardProps = {
   offer: Offer;
-  onMouseOver: (cardId: Offer['id'] | null) => void;
+  onMouseOver?: (card?: Offer) => void;
   displayMode: CardDisplayMode;
 }
 
@@ -16,8 +16,8 @@ function PlaceCard({offer, onMouseOver, displayMode}: PlaceCardProps): JSX.Eleme
   return(
     <article
       className={cardClass}
-      onMouseEnter={() => onMouseOver(offer.id)}
-      onMouseLeave={() => onMouseOver(null)}
+      onMouseEnter={onMouseOver ? () => onMouseOver(offer) : undefined}
+      onMouseLeave={onMouseOver ? () => onMouseOver() : undefined}
     >
       {offer.isPremium && <PremiumMark />}
       <div className={imgDivClass}>

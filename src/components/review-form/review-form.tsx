@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { Stars } from '../../const';
 
 function ReviewForm(): JSX.Element {
-  const [review, setReview] = useState({rating: 0, text: ''});
+  const [review, setReview] = useState<{rating: number; text: string}>({rating: 0, text: ''});
   const onRatingChange = (evt: React.FormEvent): void => {
     if (evt.target instanceof HTMLInputElement) {
       setReview({...review, rating: Number(evt.target.value)});

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PlaceCard from '../place-card/place-card';
 import { Offer, Offers } from '../../types';
 import { CardDisplayMode, CardListClass } from '../../const';
@@ -6,14 +5,14 @@ import { CardDisplayMode, CardListClass } from '../../const';
 type PlaceListProps = {
   offers: Offers;
   displayMode: CardDisplayMode;
+  onMouseOver?: (card?: Offer) => void;
 }
 
-function PlaceList({offers, displayMode}: PlaceListProps): JSX.Element {
-  const [, setActiveCardId] = useState<Offer['id'] | null>(null);
+function PlaceList({offers, displayMode, onMouseOver}: PlaceListProps): JSX.Element {
   return (
     <div className={CardListClass[displayMode]}>
       {offers.map((item) => (
-        <PlaceCard key={item.id} offer={item} onMouseOver={setActiveCardId} displayMode={displayMode}/>
+        <PlaceCard key={item.id} offer={item} onMouseOver={onMouseOver} displayMode={displayMode}/>
       ))}
     </div>
   );
