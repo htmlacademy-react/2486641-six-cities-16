@@ -1,48 +1,39 @@
+import { useState } from 'react';
 import { CardDisplayMode } from '../../const';
-import { Offers } from '../../types';
+import { Offer, Offers } from '../../types';
+import { getCities } from '../../utils';
+import Map from '../map/map';
 import PlaceList from '../place-list/place-list';
+import { Link } from 'react-router-dom';
 
 type MainScreenProps = {
   offers: Offers;
 }
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const [activeCity, setActiveCity] = useState('Amsterdam');
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
+  const handleMouseOver = (offer?: Offer) => {
+    setActiveCard(offer || null);
+  };
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            {getCities().map((city) => (
+              <li className="locations__item" key={city.name}>
+                <Link
+                  className={`locations__item-link tabs__item ${(activeCity === city.name) ? 'tabs__item--active' : ''}`}
+                  to="#"
+                  onClick={() => setActiveCity(city.name)}
+                >
+                  <span>{city.name}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </section>
       </div>
@@ -50,7 +41,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+            <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -66,10 +57,12 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlaceList offers={offers} displayMode={CardDisplayMode.city}/>
+            <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleMouseOver}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              {<Map cityName={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />}
+            </section>
           </div>
         </div>
       </div>
