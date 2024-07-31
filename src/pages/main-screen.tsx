@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { CardDisplayMode } from '../../const';
-import { Offer, Offers } from '../../types';
-import { getCities } from '../../utils';
-import Map from '../map/map';
-import PlaceList from '../place-list/place-list';
+import { CardDisplayMode } from '../const';
+import { Offer, Offers } from '../types';
+import { getCities } from '../utils';
+import Map from '../components/map/map';
+import PlaceList from '../components/place-list/place-list';
 import { Link } from 'react-router-dom';
 
 type MainScreenProps = {

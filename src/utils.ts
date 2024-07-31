@@ -21,6 +21,8 @@ export const getOffersGroupByCity = (offers: Offers) =>
 
 export const getOfferInfoById = (id: OfferInfo['id']): OfferInfo | undefined => mockOffersInfo.find((element) => element.id === id);
 
+export const getOfferById = (id: Offer['id']) => mockOffers.find((element) => element.id === id);
+
 export const getCities = () =>
   mockOffers.reduce((result: CityType[], offer: Offer) => {
     if (result.findIndex((value) => value.name === offer.city.name) === -1) {
