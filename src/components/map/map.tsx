@@ -1,7 +1,7 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
-import {MapUrl} from '../../const';
+import {DefaultLocation, MapUrl} from '../../const';
 import 'leaflet/dist/leaflet.css';
 import { CityType, Offer, Offers } from '../../types';
 import { getCity } from '../../utils';
@@ -33,6 +33,7 @@ function Map(props: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      map.flyTo([city?.location.latitude ?? DefaultLocation.latitude, city?.location.longitude ?? DefaultLocation.longitude], city?.location.zoom);
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -55,7 +56,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div style={{height: '500px'}} ref={mapRef}></div>;
+  return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
 
 export default Map;

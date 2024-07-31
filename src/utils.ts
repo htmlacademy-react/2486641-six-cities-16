@@ -29,4 +29,4 @@ export const getCities = () =>
     return result;
   }, []);
 
-export const getCity = (name: CityType['name']) => getCities().find((city) => city.name === name);
+export const getCity = (name: CityType['name']): CityType | undefined => getCities().find((city) => city.name === name);
