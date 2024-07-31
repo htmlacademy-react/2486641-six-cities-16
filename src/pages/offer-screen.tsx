@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { OfferInfo } from '../../types.ts';
+import { OfferInfo } from '../types.ts';
 import NotFoundScreen from './not-found-screen.tsx';
-import ReviewForm from '../review-form/review-form.tsx';
-import { getOfferInfoById } from '../../utils.ts';
-import BookmarkButton from '../bookmark-button/bookmark-button.tsx';
-import { BookmarkButtonDisplayMode } from '../../const.ts';
+import ReviewForm from '../components/review-form/review-form.tsx';
+import { getOfferInfoById } from '../utils.ts';
+import BookmarkButton from '../components/bookmark-button/bookmark-button.tsx';
+import { BookmarkButtonDisplayMode } from '../const.ts';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();
