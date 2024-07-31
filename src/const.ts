@@ -32,7 +32,8 @@ export const Stars = [
 
 export enum CardDisplayMode {
   city,
-  favorite
+  favorite,
+  near
 }
 
 export const CardSettings = {
@@ -52,11 +53,20 @@ export const CardSettings = {
       imgHeight: '110',
       infoClass: 'favorites__card-info place-card__info',
     },
+  [CardDisplayMode.near]:
+    {
+      cardClass: 'near-places__card place-card',
+      imgDivClass: 'near-places__image-wrapper place-card__image-wrapper',
+      imgWidth: '260',
+      imgHeight: '200',
+      infoClass: 'place-card__info',
+    },
 };
 
 export const CardListClass = {
   [CardDisplayMode.city]: 'cities__places-list places__list tabs__content',
-  [CardDisplayMode.favorite]: 'favorites__places'
+  [CardDisplayMode.favorite]: 'favorites__places',
+  [CardDisplayMode.near]: 'near-places__list places__list',
 };
 
 
