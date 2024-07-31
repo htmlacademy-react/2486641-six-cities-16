@@ -109,4 +109,4 @@ export enum MapUrl {
 export const DefaultLocation = {
   latitude: 0,
   longitude: 0,
-}
+};
