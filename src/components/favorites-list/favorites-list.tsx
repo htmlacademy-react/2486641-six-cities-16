@@ -1,5 +1,5 @@
 import { CardDisplayMode } from '../../const';
-import { Offers } from '../../types';
+import { Offers } from '../../types/types';
 import { getOffersGroupByCity } from '../../utils';
 import PlaceList from '../place-list/place-list';
 

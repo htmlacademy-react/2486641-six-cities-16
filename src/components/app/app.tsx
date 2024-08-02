@@ -7,15 +7,14 @@ import OfferScreen from '../../pages/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
-import { Offers } from '../../types';
+import { Offers } from '../../types/types';
 import Layout from '../layout/layout';
 
 type AppProps = {
-  offers: Offers;
   favoriteOffers: Offers;
 }
 
-function App({offers, favoriteOffers}: AppProps): JSX.Element {
+function App({favoriteOffers}: AppProps): JSX.Element {
   const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
   return (
     <BrowserRouter>
@@ -26,7 +25,7 @@ function App({offers, favoriteOffers}: AppProps): JSX.Element {
         >
           <Route
             index
-            element = {<MainScreen offers={offers} />}
+            element = {<MainScreen />}
           />
           <Route
             path = {AppRoute.Login}

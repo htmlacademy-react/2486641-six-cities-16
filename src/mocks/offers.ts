@@ -1,4 +1,4 @@
-import { Offers } from '../types';
+import { Offers } from '../types/types';
 
 export const mockOffers: Offers = [
   {
