@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Comments, Offer, OfferInfo, Offers } from '../types/types.ts';
 import NotFoundScreen from './not-found-screen.tsx';
 import ReviewForm from '../components/review-form/review-form.tsx';
-import { getOfferById, getOfferInfoById } from '../utils.ts';
+import { getOfferById, getOfferInfoById } from '../utils/utils.ts';
 import BookmarkButton from '../components/bookmark-button/bookmark-button.tsx';
 import { BookmarkButtonDisplayMode, CardDisplayMode } from '../const.ts';
 import ReviewsList from '../components/reviews-list/reviews-list.tsx';
@@ -122,7 +122,7 @@ function OfferScreen(): JSX.Element {
           </div>
         </div>
         <section className="offer__map map">
-          <Map cityName={offer.city.name} offers={points} selectedOffer={selectedOffer}/>
+          <Map city={offer.city} offers={points} selectedOffer={selectedOffer}/>
         </section>
       </section>
 

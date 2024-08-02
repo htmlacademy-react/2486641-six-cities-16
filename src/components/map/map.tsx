@@ -3,37 +3,35 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import {DefaultLocation, MapUrl} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { CityType, Offer, Offers } from '../../types/types';
-import { getCity } from '../../utils';
+import { City, Offer, Offers } from '../../types/types';
 
 type MapProps = {
-  cityName: CityType['name'];
+  city: City;
   offers: Offers;
   selectedOffer: Offer | undefined;
 };
 
 const defaultCustomIcon = new Icon({
   iconUrl: MapUrl.MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [14, 39]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: MapUrl.MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [14, 39]
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {cityName, offers, selectedOffer} = props;
+  const {city, offers, selectedOffer} = props;
 
   const mapRef = useRef(null);
-  const city = getCity(cityName);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      map.flyTo([city?.location.latitude ?? DefaultLocation.latitude, city?.location.longitude ?? DefaultLocation.longitude], city?.location.zoom);
+      map.flyTo([city.location.latitude ?? DefaultLocation.latitude, city.location.longitude ?? DefaultLocation.longitude], city.location.zoom);
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
