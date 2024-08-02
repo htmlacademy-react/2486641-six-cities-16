@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { mockOffers } from './mocks/offers';
 import { getFavoriteOffers } from './utils';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const offers = mockOffers;
 const favoriteOffers = getFavoriteOffers();
 
 root.render(
   <React.StrictMode>
-    <App offers={offers} favoriteOffers={favoriteOffers} />
+    <Provider store={store}>
+      <App favoriteOffers={favoriteOffers} />
+    </Provider>
   </React.StrictMode>
 );

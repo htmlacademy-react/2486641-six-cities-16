@@ -1,6 +1,7 @@
+import { mockCities } from './mocks/cities';
 import { mockOffers } from './mocks/offers';
 import { mockOffersInfo } from './mocks/offers-info';
-import { CityType, Offer, OfferInfo, Offers } from './types';
+import { CityType, Offer, OfferInfo, Offers } from './types/types';
 
 export const getFavoriteOffers = (): Offers => {
   const res = mockOffers.filter((offer) => offer.isFavorite);
@@ -23,12 +24,6 @@ export const getOfferInfoById = (id: OfferInfo['id']): OfferInfo | undefined => 
 
 export const getOfferById = (id: Offer['id']) => mockOffers.find((element) => element.id === id);
 
-export const getCities = () =>
-  mockOffers.reduce((result: CityType[], offer: Offer) => {
-    if (result.findIndex((value) => value.name === offer.city.name) === -1) {
-      result.push(offer.city);
-    }
-    return result;
-  }, []);
+export const getCities = () => mockCities;
 
 export const getCity = (name: CityType['name']): CityType | undefined => getCities().find((city) => city.name === name);

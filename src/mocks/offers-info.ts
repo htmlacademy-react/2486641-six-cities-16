@@ -1,4 +1,4 @@
-import { OffersInfo } from '../types';
+import { OffersInfo } from '../types/types';
 
 export const mockOffersInfo: OffersInfo = [
   {

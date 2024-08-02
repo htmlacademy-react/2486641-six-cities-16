@@ -1,4 +1,4 @@
-export const commentsMock = [
+export const mockComments = [
   {
     'id': 'a13461c7-a8ea-4016-a476-df68d985e365',
     'comment': 'What an amazing view! The house is stunning and in an amazing location. The large glass wall had an amazing view of the river!',

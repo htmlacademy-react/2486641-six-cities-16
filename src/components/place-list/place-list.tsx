@@ -1,5 +1,5 @@
 import PlaceCard from '../place-card/place-card';
-import { Offer, Offers } from '../../types';
+import { Offer, Offers } from '../../types/types';
 import { CardDisplayMode, CardListClass } from '../../const';
 
 type PlaceListProps = {

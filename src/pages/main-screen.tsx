@@ -1,40 +1,29 @@
 import { useState } from 'react';
 import { CardDisplayMode } from '../const';
-import { Offer, Offers } from '../types';
+import { CityType, Offer } from '../types/types';
 import { getCities } from '../utils';
 import Map from '../components/map/map';
 import PlaceList from '../components/place-list/place-list';
-import { Link } from 'react-router-dom';
+import CityList from '../components/city-list/city-list';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { changeCity } from '../store/action';
 
-type MainScreenProps = {
-  offers: Offers;
-}
-
-function MainScreen({offers}: MainScreenProps): JSX.Element {
-  const [activeCity, setActiveCity] = useState('Amsterdam');
+function MainScreen(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const activeCity = useAppSelector((state) => state.cityName);
+  const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const handleMouseOver = (offer?: Offer) => {
     setActiveCard(offer || null);
   };
+  const handleSelectCity = (cityName: CityType['name']) => dispatch(changeCity({cityName: cityName}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list">
-            {getCities().map((city) => (
-              <li className="locations__item" key={city.name}>
-                <Link
-                  className={`locations__item-link tabs__item ${(activeCity === city.name) ? 'tabs__item--active' : ''}`}
-                  to="#"
-                  onClick={() => setActiveCity(city.name)}
-                >
-                  <span>{city.name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <CityList activeCity={activeCity} cities={getCities()} onSelectCity={handleSelectCity}/>
         </section>
       </div>
       <div className="cities">

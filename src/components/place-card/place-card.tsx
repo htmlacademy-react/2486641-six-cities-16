@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types';
+import { Offer } from '../../types/types';
 import PremiumMark from '../premium-mark/premium-mark';
 import { AppRoute, BookmarkButtonDisplayMode, CardDisplayMode, CardSettings } from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';

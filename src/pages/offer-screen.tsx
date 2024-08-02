@@ -1,19 +1,19 @@
 import { useParams } from 'react-router-dom';
-import { Comments, Offer, OfferInfo, Offers } from '../types.ts';
+import { Comments, Offer, OfferInfo, Offers } from '../types/types.ts';
 import NotFoundScreen from './not-found-screen.tsx';
 import ReviewForm from '../components/review-form/review-form.tsx';
 import { getOfferById, getOfferInfoById } from '../utils.ts';
 import BookmarkButton from '../components/bookmark-button/bookmark-button.tsx';
 import { BookmarkButtonDisplayMode, CardDisplayMode } from '../const.ts';
 import ReviewsList from '../components/reviews-list/reviews-list.tsx';
-import { commentsMock } from '../mocks/comments.ts';
+import { mockComments } from '../mocks/comments.ts';
 import PlaceList from '../components/place-list/place-list.tsx';
 import { mockOffers } from '../mocks/offers.ts';
 import Map from '../components/map/map.tsx';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();
-  const comments: Comments = commentsMock;
+  const comments: Comments = mockComments;
   let offer: OfferInfo | undefined = undefined;
   let selectedOffer: Offer | undefined = undefined;
   let nearOffers: Offers = [];
