@@ -9,6 +9,8 @@ import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
 import { Offers } from '../../types/types';
 import Layout from '../layout/layout';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppProps = {
   favoriteOffers: Offers;
@@ -16,6 +18,12 @@ type AppProps = {
 
 function App({favoriteOffers}: AppProps): JSX.Element {
   const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <BrowserRouter>
       <Routes>

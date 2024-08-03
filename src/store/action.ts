@@ -7,3 +7,5 @@ export const changeCity = createAction<{city: City}>('city/change');
 export const setSort = createAction<{sort: Sort}>('sort/set');
 
 export const loadOffers = createAction<Offers>('data/loadOffers');
+
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

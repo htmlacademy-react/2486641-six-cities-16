@@ -6,12 +6,12 @@ import { store } from './store';
 import { Offers } from './types/types';
 import { fetchOffersAction } from './store/api-actions';
 
+store.dispatch(fetchOffersAction());
+const favoriteOffers: Offers = [];
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-store.dispatch(fetchOffersAction());
-const favoriteOffers: Offers = [];
 
 root.render(
   <React.StrictMode>
