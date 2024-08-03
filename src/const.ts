@@ -126,3 +126,7 @@ export enum Sort {
   priceDesc = 'Price: high to low',
   topRating = 'Top rated first'
 }
+
+export enum APIRoute {
+  Offers = '/offers',
+}
