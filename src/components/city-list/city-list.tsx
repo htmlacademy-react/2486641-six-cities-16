@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { CityType } from '../../types/types';
+import { City } from '../../types/types';
 
 type CityListProps = {
-  cities: CityType[];
-  activeCity: CityType['name'];
-  onSelectCity: (cityName: CityType['name']) => void;
+  cities: City[];
+  activeCity: City;
+  onSelectCity: (city: City) => void;
 }
 
 function CityList({cities, activeCity, onSelectCity}: CityListProps): JSX.Element {
@@ -13,9 +13,9 @@ function CityList({cities, activeCity, onSelectCity}: CityListProps): JSX.Elemen
       {cities.map((city) => (
         <li className="locations__item" key={city.name}>
           <Link
-            className={`locations__item-link tabs__item ${(activeCity === city.name) ? 'tabs__item--active' : ''}`}
+            className={`locations__item-link tabs__item ${(activeCity.name === city.name) ? 'tabs__item--active' : ''}`}
             to="#"
-            onClick={() => onSelectCity(city.name)}
+            onClick={() => onSelectCity(city)}
           >
             <span>{city.name}</span>
           </Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { getFavoriteOffers } from './utils';
+import { getFavoriteOffers } from './utils/utils';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
