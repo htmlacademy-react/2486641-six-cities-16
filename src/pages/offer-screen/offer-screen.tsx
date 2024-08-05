@@ -1,41 +1,34 @@
 import { useParams } from 'react-router-dom';
-import { Comments, Offer, OfferInfo, Offers } from '../../types/types.ts';
+import { Comments } from '../../types/types.ts';
 import ReviewForm from '../../components/review-form/review-form.tsx';
-import { getOfferInfoById } from '../../utils/utils.ts';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
 import { BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import { mockComments } from '../../mocks/comments.ts';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
-import { useAppSelector } from '../../hooks/index.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
+import { fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
+import { useEffect } from 'react';
 
 function OfferScreen(): JSX.Element {
-  const params = useParams();
+  const {id} = useParams();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getOfferAction(id));
+    dispatch(fetchNearOffersAction(id));
+  }, [dispatch, id]);
+  const offer = useAppSelector((state) => state.offerInfo);
+  const nearOffers = useAppSelector((state) => state.nearOffers.slice(-3));
+
   const comments: Comments = mockComments;
-  const offers = useAppSelector((state) => state.offers);
-  let offer: OfferInfo | undefined = undefined;
-  let selectedOffer: Offer | undefined = undefined;
-  let nearOffers: Offers = [];
-  let points: Offers = [];
-  if (params.id) {
-    offer = getOfferInfoById(params.id);
-    //selectedOffer = getOfferById(params.id);
-    selectedOffer = offers.find((element) => element.id === params.id);
-    //nearOffers = mockOffers.filter((item) => item.city.name === offer?.city.name).slice(-3);
-    nearOffers = [];
-    points = [...nearOffers];
-    if (selectedOffer) {
-      points.push(selectedOffer);
-    }
-  }
-  if (!offer || !selectedOffer) {
+  if (!offer) {
     return (
       <NotFoundScreen />
     );
   }
-  return(
+  return (
     <main className="page__main page__main--offer">
       <section className="offer">
         <div className="offer__gallery-container container">
@@ -125,7 +118,7 @@ function OfferScreen(): JSX.Element {
           </div>
         </div>
         <section className="offer__map map">
-          <Map city={offer.city} offers={points} selectedOffer={selectedOffer}/>
+          <Map city={offer.city} offers={[offer, ...nearOffers]} selectedOffer={offer}/>
         </section>
       </section>
 

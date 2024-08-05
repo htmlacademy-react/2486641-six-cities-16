@@ -130,5 +130,6 @@ export enum Sort {
 export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  NearOffers = '/offers/{offerId}/nearby',
 }
