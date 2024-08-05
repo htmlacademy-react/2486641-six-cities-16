@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import { Offers } from '../types/types';
-import FavoritesList from '../components/favorites-list/favorites-list';
-import Logo from '../components/logo/logo';
-import { LogoDisplayMode } from '../const';
+import { Offers } from '../../types/types';
+import FavoritesList from '../../components/favorites-list/favorites-list';
+import Logo from '../../components/logo/logo';
+import { LogoDisplayMode } from '../../const';
 
 type FavoritesScreenProps = {
   favoriteOffers: Offers;
