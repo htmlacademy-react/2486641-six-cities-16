@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainScreen from '../../pages/main-screen';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import LoginScreen from '../../pages/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
-import OfferScreen from '../../pages/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
@@ -11,6 +8,9 @@ import { Offers } from '../../types/types';
 import Layout from '../layout/layout';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import MainScreen from '../../pages/main-screen/main-screen';
+import LoginScreen from '../../pages/login-screen/login-screen';
+import OfferScreen from '../../pages/offer-screen/offer-screen';
 
 type AppProps = {
   favoriteOffers: Offers;
