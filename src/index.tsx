@@ -4,8 +4,11 @@ import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { Offers } from './types/types';
-import { fetchOffersAction } from './store/api-actions';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
 const favoriteOffers: Offers = [];
 
@@ -16,6 +19,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App favoriteOffers={favoriteOffers} />
     </Provider>
   </React.StrictMode>
