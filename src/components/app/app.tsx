@@ -17,7 +17,7 @@ type AppProps = {
 }
 
 function App({favoriteOffers}: AppProps): JSX.Element {
-  const AuthStatus: AuthorizationStatus = AuthorizationStatus.Auth;
+  const authStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   if (isOffersDataLoading) {
     return (
@@ -29,7 +29,7 @@ function App({favoriteOffers}: AppProps): JSX.Element {
       <Routes>
         <Route
           path = {AppRoute.Main}
-          element = {<Layout />}
+          element = {<Layout authStatus={authStatus}/>}
         >
           <Route
             index
@@ -39,7 +39,7 @@ function App({favoriteOffers}: AppProps): JSX.Element {
             path = {AppRoute.Login}
             element = {
               <NoAuthRoute
-                authorizationStatus={AuthStatus}
+                authorizationStatus={authStatus}
               >
                 <LoginScreen />
               </NoAuthRoute>
@@ -49,7 +49,7 @@ function App({favoriteOffers}: AppProps): JSX.Element {
             path = {AppRoute.Favorites}
             element = {
               <PrivateRoute
-                authorizationStatus={AuthStatus}
+                authorizationStatus={authStatus}
               >
                 <FavoritesScreen favoriteOffers={favoriteOffers}/>
               </PrivateRoute>

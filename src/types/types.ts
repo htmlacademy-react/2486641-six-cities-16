@@ -65,3 +65,13 @@ export type Comment = {
 }
 
 export type Comments = Comment[]
+
+export type UserData = User & {
+  email: string;
+  token: string;
+};
+
+export type AuthData = {
+  login: string;
+  password: string;
+};
