@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { CardDisplayMode } from '../const';
-import { City, Offer } from '../types/types';
-import Map from '../components/map/map';
-import PlaceList from '../components/place-list/place-list';
-import CityList from '../components/city-list/city-list';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { changeCity } from '../store/action';
-import PlacesSorting from '../components/places-sorting/places-sorting';
-import { SortRules } from '../utils/sort';
-import { mockCities } from '../mocks/cities';
+import { CardDisplayMode } from '../../const';
+import { City, Offer } from '../../types/types';
+import Map from '../../components/map/map';
+import PlaceList from '../../components/place-list/place-list';
+import CityList from '../../components/city-list/city-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity } from '../../store/action';
+import PlacesSorting from '../../components/places-sorting/places-sorting';
+import { SortRules } from '../../utils/sort';
+import { mockCities } from '../../mocks/cities';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);

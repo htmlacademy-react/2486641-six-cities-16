@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { getFavoriteOffers } from './utils/utils';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { Offers } from './types/types';
+import { fetchOffersAction } from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
+const favoriteOffers: Offers = [];
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const favoriteOffers = getFavoriteOffers();
 
 root.render(
   <React.StrictMode>

@@ -1,27 +1,30 @@
 import { useParams } from 'react-router-dom';
-import { Comments, Offer, OfferInfo, Offers } from '../types/types.ts';
-import NotFoundScreen from './not-found-screen.tsx';
-import ReviewForm from '../components/review-form/review-form.tsx';
-import { getOfferById, getOfferInfoById } from '../utils/utils.ts';
-import BookmarkButton from '../components/bookmark-button/bookmark-button.tsx';
-import { BookmarkButtonDisplayMode, CardDisplayMode } from '../const.ts';
-import ReviewsList from '../components/reviews-list/reviews-list.tsx';
-import { mockComments } from '../mocks/comments.ts';
-import PlaceList from '../components/place-list/place-list.tsx';
-import { mockOffers } from '../mocks/offers.ts';
-import Map from '../components/map/map.tsx';
+import { Comments, Offer, OfferInfo, Offers } from '../../types/types.ts';
+import ReviewForm from '../../components/review-form/review-form.tsx';
+import { getOfferInfoById } from '../../utils/utils.ts';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
+import { BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
+import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
+import { mockComments } from '../../mocks/comments.ts';
+import PlaceList from '../../components/place-list/place-list.tsx';
+import Map from '../../components/map/map.tsx';
+import { useAppSelector } from '../../hooks/index.ts';
+import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
 
 function OfferScreen(): JSX.Element {
   const params = useParams();
   const comments: Comments = mockComments;
+  const offers = useAppSelector((state) => state.offers);
   let offer: OfferInfo | undefined = undefined;
   let selectedOffer: Offer | undefined = undefined;
   let nearOffers: Offers = [];
   let points: Offers = [];
   if (params.id) {
     offer = getOfferInfoById(params.id);
-    selectedOffer = getOfferById(params.id);
-    nearOffers = mockOffers.filter((item) => item.city.name === offer?.city.name).slice(-3);
+    //selectedOffer = getOfferById(params.id);
+    selectedOffer = offers.find((element) => element.id === params.id);
+    //nearOffers = mockOffers.filter((item) => item.city.name === offer?.city.name).slice(-3);
+    nearOffers = [];
     points = [...nearOffers];
     if (selectedOffer) {
       points.push(selectedOffer);

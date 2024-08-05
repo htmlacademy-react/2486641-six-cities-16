@@ -1,5 +1,5 @@
-import { LogoDisplayMode } from '../const';
-import Logo from '../components/logo/logo';
+import { LogoDisplayMode } from '../../const';
+import Logo from '../../components/logo/logo';
 
 function LoginScreen(): JSX.Element {
   return(
