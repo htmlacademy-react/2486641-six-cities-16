@@ -1,7 +1,10 @@
-import { Fragment, useState } from 'react';
+import { FormEvent, Fragment, useState } from 'react';
 import { Stars } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { postComment } from '../../store/api-actions';
 
 function ReviewForm(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [review, setReview] = useState<{rating: number; text: string}>({rating: 0, text: ''});
   const onRatingChange = (evt: React.FormEvent): void => {
     if (evt.target instanceof HTMLInputElement) {
@@ -9,8 +12,14 @@ function ReviewForm(): JSX.Element {
     }
   };
   const onTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => setReview({...review, text: evt.target.value});
+  // const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  //   evt.preventDefault();
+  //   dispatch(postComment({
+  //     offerId:
+  //   }));
+  // };
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Stars.map((star) => (

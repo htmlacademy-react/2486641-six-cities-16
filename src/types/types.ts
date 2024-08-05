@@ -71,3 +71,9 @@ export type OfferLocation = {
   id: string;
   location: Location;
 };
+
+export type CommentData = {
+  offerId: Offer['id'];
+  comment: Comment['comment'];
+  rating: Comment['rating'];
+};
