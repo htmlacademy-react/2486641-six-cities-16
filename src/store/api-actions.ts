@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, OfferInfo, Offers, UserData } from '../types/types';
-import { getOffer, loadNearOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
+import { AuthData, Comments, OfferInfo, Offers, UserData } from '../types/types';
+import { getOffer, loadComments, loadNearOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -86,6 +86,20 @@ export const fetchNearOffersAction = createAsyncThunk<void, string | undefined, 
     if (offerId) {
       const {data} = await api.get<Offers>(APIRoute.NearOffers.replace('{offerId}', offerId));
       dispatch(loadNearOffers(data));
+    }
+  },
+);
+
+export const fetchComments = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (offerId, {dispatch, extra: api}) => {
+    if (offerId) {
+      const {data} = await api.get<Comments>(APIRoute.Comments + offerId);
+      dispatch(loadComments(data));
     }
   },
 );

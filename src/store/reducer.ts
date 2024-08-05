@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOffer, loadNearOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus, setSort } from './action';
+import { changeCity, getOffer, loadComments, loadNearOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus, setSort } from './action';
 import { AuthorizationStatus, Sort } from '../const';
-import { City, OfferInfo, Offers } from '../types/types';
+import { City, Comments, OfferInfo, Offers } from '../types/types';
 
 type InitialState = {
   city: City;
@@ -11,6 +11,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   offerInfo: OfferInfo | undefined;
   nearOffers: Offers;
+  comments: Comments;
 };
 
 const initialState: InitialState = {
@@ -28,6 +29,7 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   offerInfo: undefined,
   nearOffers: [],
+  comments: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -52,6 +54,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearOffers, (state, action) => {
       state.nearOffers = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     });
 });
 

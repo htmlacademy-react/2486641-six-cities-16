@@ -1,15 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { Comments } from '../../types/types.ts';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
 import { BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
-import { mockComments } from '../../mocks/comments.ts';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
-import { fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
+import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
 import { useEffect } from 'react';
 
 function OfferScreen(): JSX.Element {
@@ -18,11 +16,11 @@ function OfferScreen(): JSX.Element {
   useEffect(() => {
     dispatch(getOfferAction(id));
     dispatch(fetchNearOffersAction(id));
+    dispatch(fetchComments(id));
   }, [dispatch, id]);
   const offer = useAppSelector((state) => state.offerInfo);
   const nearOffers = useAppSelector((state) => state.nearOffers.slice(-3));
-
-  const comments: Comments = mockComments;
+  const comments = useAppSelector((state) => state.comments);
   if (!offer) {
     return (
       <NotFoundScreen />

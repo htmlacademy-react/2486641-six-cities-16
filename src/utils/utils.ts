@@ -1,10 +1,4 @@
-import { mockOffersInfo } from '../mocks/offers-info';
-import { Offer, OfferInfo, Offers } from '../types/types';
-
-// export const getFavoriteOffers = (): Offers => {
-//   const res = mockOffers.filter((offer) => offer.isFavorite);
-//   return res;
-// };
+import { Offer, Offers } from '../types/types';
 
 export const getOffersGroupByCity = (offers: Offers) =>
   offers.reduce((result: {[name: string]: Offers}, offer: Offer) => {
@@ -17,7 +11,3 @@ export const getOffersGroupByCity = (offers: Offers) =>
     // Возвращение объекта для следующего шага
     return result;
   }, {});
-
-export const getOfferInfoById = (id: OfferInfo['id']): OfferInfo | undefined => mockOffersInfo.find((element) => element.id === id);
-
-//export const getOfferById = (id: Offer['id']) => mockOffers.find((element) => element.id === id);
