@@ -30,20 +30,11 @@ type Host = {
   avatarUrl: string;
 }
 
-export type OfferInfo = {
-  id: string;
-  title: string;
+export type OfferInfo = Omit<Offer, 'previewImage'> & {
   description: string;
-  type: string;
-  price: number;
   images: string[];
   goods: string[];
-  city: City;
-  location: Location;
   host: Host;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
   bedrooms: number;
   maxAdults: number;
 }
@@ -74,4 +65,15 @@ export type UserData = User & {
 export type AuthData = {
   login: string;
   password: string;
+};
+
+export type OfferLocation = {
+  id: string;
+  location: Location;
+};
+
+export type CommentData = {
+  offerId: Offer['id'];
+  comment: Comment['comment'];
+  rating: Comment['rating'];
 };

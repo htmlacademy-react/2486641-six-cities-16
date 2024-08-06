@@ -1,16 +1,32 @@
-import { Fragment, useState } from 'react';
+import { FormEvent, Fragment, useState } from 'react';
 import { Stars } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { postComment } from '../../store/api-actions';
+import { CommentData, Offer } from '../../types/types';
 
-function ReviewForm(): JSX.Element {
-  const [review, setReview] = useState<{rating: number; text: string}>({rating: 0, text: ''});
+type ReviewFormProps = {
+  offerId: Offer['id'];
+}
+
+function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [review, setReview] = useState<CommentData>({rating: 0, comment: '', offerId: offerId});
   const onRatingChange = (evt: React.FormEvent): void => {
     if (evt.target instanceof HTMLInputElement) {
       setReview({...review, rating: Number(evt.target.value)});
     }
   };
-  const onTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => setReview({...review, text: evt.target.value});
+  const onTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => setReview({...review, comment: evt.target.value});
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (review.rating !== null && review.comment !== null) {
+      dispatch(postComment(review));
+      setReview({...review, comment: '', rating: 0});
+    }
+  };
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Stars.map((star) => (
@@ -18,6 +34,7 @@ function ReviewForm(): JSX.Element {
             <input
               className="form__rating-input visually-hidden"
               name="rating"
+              // TODO: получать значение рейтинга из state
               value={star.value}
               id={`${star.value}-stars`}
               type="radio"
@@ -42,7 +59,7 @@ function ReviewForm(): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={onTextChange}
-        value={review.text}
+        value={review.comment}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

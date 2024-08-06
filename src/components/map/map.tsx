@@ -3,12 +3,12 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import {DefaultLocation, MapUrl} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { City, Offer, Offers } from '../../types/types';
+import { City, Offer, OfferInfo, OfferLocation } from '../../types/types';
 
 type MapProps = {
   city: City;
-  offers: Offers;
-  selectedOffer: Offer | undefined;
+  offers: OfferLocation[];
+  selectedOffer: Offer | OfferInfo | undefined;
 };
 
 const defaultCustomIcon = new Icon({
