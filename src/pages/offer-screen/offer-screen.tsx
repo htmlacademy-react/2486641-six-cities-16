@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
-import { BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
+import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
+  const authStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
   useEffect(() => {
     dispatch(getOfferAction(id));
     dispatch(fetchNearOffersAction(id));
@@ -111,7 +112,9 @@ function OfferScreen(): JSX.Element {
             <section className="offer__reviews reviews">
               <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
               <ReviewsList comments={comments}/>
-              <ReviewForm />
+              {(authStatus === AuthorizationStatus.Auth)
+                ? <ReviewForm offerId={offer.id}/>
+                : ''}
             </section>
           </div>
         </div>
