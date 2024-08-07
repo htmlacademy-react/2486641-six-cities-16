@@ -1,3 +1,5 @@
+import { City } from "./types/types";
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -134,3 +136,19 @@ export enum APIRoute {
   NearOffers = '/offers/{offerId}/nearby',
   Comments = '/comments/',
 }
+
+export enum NameSpace {
+  User = 'USER',
+  Data = 'DATA',
+  City = 'CITY',
+  Sort = 'SORT',
+}
+
+export const DefaultCity: City = {
+  'name': 'Paris',
+  'location': {
+    'latitude': 48.85661,
+    'longitude': 2.351499,
+    'zoom': 13
+  }
+};

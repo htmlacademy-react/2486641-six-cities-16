@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { CardDisplayMode } from '../../const';
+import { CardDisplayMode, NameSpace } from '../../const';
 import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
 import PlaceList from '../../components/place-list/place-list';
 import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/action';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import { SortRules } from '../../utils/sort';
 import { mockCities } from '../../mocks/cities';
+import { getOffers } from '../../store/data-process/selectors';
+import { changeCity } from '../../store/city/city';
 
 function MainScreen(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city);
-  const activeSort = useAppSelector((state) => state.sort);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector((state) => state[NameSpace.City].city);
+  const activeSort = useAppSelector((state) => state[NameSpace.Sort].sort);
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const handleMouseOver = (offer?: Offer) => {

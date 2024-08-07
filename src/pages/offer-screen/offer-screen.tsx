@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
-import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
+import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode, NameSpace } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
@@ -9,19 +9,23 @@ import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
 import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
 import { useEffect } from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const authStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus: AuthorizationStatus = useAppSelector(getAuthorizationStatus);
   useEffect(() => {
     dispatch(getOfferAction(id));
     dispatch(fetchNearOffersAction(id));
     dispatch(fetchComments(id));
   }, [dispatch, id]);
-  const offer = useAppSelector((state) => state.offerInfo);
-  const nearOffers = useAppSelector((state) => state.nearOffers.slice(-3));
-  const comments = useAppSelector((state) => state.comments);
+  const offer = useAppSelector((state) => state[NameSpace.Data].offerInfo);
+  const nearOffers = useAppSelector((state) => state[NameSpace.Data].nearOffers.slice(-3));
+  const comments = useAppSelector((state) => state[NameSpace.Data].comments);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   if (!offer) {
     return (
       <NotFoundScreen />
