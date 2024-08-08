@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CardDisplayMode } from '../../const';
 import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
-import PlaceList from '../../components/place-list/place-list';
 import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
@@ -11,6 +10,7 @@ import { mockCities } from '../../mocks/cities';
 import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
 import { NameSpace } from '../../store/const';
+import PlaceList from '../../components/place-list/place-list';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
@@ -18,9 +18,9 @@ function MainScreen(): JSX.Element {
   const activeSort = useAppSelector((state) => state[NameSpace.Sort].sort);
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
-  const handleMouseOver = (offer?: Offer) => {
+  const handleMouseOver = useCallback((offer?: Offer) => {
     setActiveCard(offer || null);
-  };
+  }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
   return (
