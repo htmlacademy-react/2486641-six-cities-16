@@ -9,6 +9,7 @@ const initialState: DataProcess = {
   nearOffers: [],
   comments: [],
   isOffersDataLoading: false,
+  hasError: false,
 };
 
 export const dataProcess = createSlice({
@@ -19,10 +20,15 @@ export const dataProcess = createSlice({
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.hasError = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        state.hasError = true;
       })
       .addCase(getOfferAction.fulfilled, (state, action) => {
         state.offerInfo = action.payload;

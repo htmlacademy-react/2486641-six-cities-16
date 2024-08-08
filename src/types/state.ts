@@ -16,4 +16,5 @@ export type DataProcess = {
   nearOffers: Offers;
   comments: Comments;
   isOffersDataLoading: boolean;
+  hasError: boolean;
 };

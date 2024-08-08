@@ -4,3 +4,4 @@ import { NameSpace } from '../const';
 
 export const getOffers = (state: State): Offers => state[NameSpace.Data].offers;
 export const getOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isOffersDataLoading;
+export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;
