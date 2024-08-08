@@ -10,7 +10,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
 import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
 import { useEffect } from 'react';
 import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
-import { NameSpace } from '../../store/const.ts';
+import { getComments, getNearOffers, getOffersInfo } from '../../store/data-process/selectors.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -21,9 +21,9 @@ function OfferScreen(): JSX.Element {
     dispatch(fetchNearOffersAction(id));
     dispatch(fetchComments(id));
   }, [dispatch, id]);
-  const offer = useAppSelector((state) => state[NameSpace.Data].offerInfo);
-  const nearOffers = useAppSelector((state) => state[NameSpace.Data].nearOffers.slice(-3));
-  const comments = useAppSelector((state) => state[NameSpace.Data].comments);
+  const offer = useAppSelector(getOffersInfo);
+  const nearOffers = useAppSelector(getNearOffers).slice(-3);
+  const comments = useAppSelector(getComments);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);

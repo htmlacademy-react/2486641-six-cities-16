@@ -9,13 +9,14 @@ import { SortRules } from '../../utils/sort';
 import { mockCities } from '../../mocks/cities';
 import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
-import { NameSpace } from '../../store/const';
 import PlaceList from '../../components/place-list/place-list';
+import { getCity } from '../../store/city/selectors';
+import { getSort } from '../../store/sort/selectors';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
-  const activeCity = useAppSelector((state) => state[NameSpace.City].city);
-  const activeSort = useAppSelector((state) => state[NameSpace.Sort].sort);
+  const activeCity = useAppSelector(getCity);
+  const activeSort = useAppSelector(getSort);
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const handleMouseOver = useCallback((offer?: Offer) => {
