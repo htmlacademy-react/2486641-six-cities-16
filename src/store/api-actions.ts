@@ -1,22 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../const';
 import { AppDispatch, State } from '../types/state';
 import { AuthData, Comment, CommentData, Comments, OfferInfo, Offers, UserData } from '../types/types';
-import { getOffer, loadComments, loadNearOffers, loadOffers, setOffersDataLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
+import { APIRoute } from './const';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersDataLoadingStatus(true));
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offers>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
@@ -55,45 +52,45 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const getOfferAction = createAsyncThunk<void, string | undefined, {
+export const getOfferAction = createAsyncThunk<OfferInfo, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/getOffer',
-  async (id, {dispatch, extra: api}) => {
-    if (id) {
-      const {data} = await api.get<OfferInfo>(`${APIRoute.Offers}/${id}`);
-      dispatch(getOffer(data));
-    }
+  async (id, {extra: api}) => {
+    const {data} = await api.get<OfferInfo>(`${APIRoute.Offers}/${id}`);
+    return data;
   },
 );
 
-export const fetchNearOffersAction = createAsyncThunk<void, string | undefined, {
+export const fetchNearOffersAction = createAsyncThunk<Offers, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchNearOffers',
-  async (offerId, {dispatch, extra: api}) => {
+  async (offerId, {extra: api}) => {
     if (offerId) {
       const {data} = await api.get<Offers>(APIRoute.NearOffers.replace('{offerId}', offerId));
-      dispatch(loadNearOffers(data));
+      return data;
     }
+    return [];
   },
 );
 
-export const fetchComments = createAsyncThunk<void, string | undefined, {
+export const fetchComments = createAsyncThunk<Comments, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchComments',
-  async (offerId, {dispatch, extra: api}) => {
+  async (offerId, {extra: api}) => {
     if (offerId) {
       const {data} = await api.get<Comments>(APIRoute.Comments + offerId);
-      dispatch(loadComments(data));
+      return data;
     }
+    return [];
   },
 );
 

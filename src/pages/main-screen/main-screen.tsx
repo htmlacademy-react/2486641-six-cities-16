@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardDisplayMode, NameSpace } from '../../const';
+import { CardDisplayMode } from '../../const';
 import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
 import PlaceList from '../../components/place-list/place-list';
@@ -10,6 +10,7 @@ import { SortRules } from '../../utils/sort';
 import { mockCities } from '../../mocks/cities';
 import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
+import { NameSpace } from '../../store/const';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);

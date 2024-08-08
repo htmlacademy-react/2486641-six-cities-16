@@ -1,4 +1,4 @@
-import { City } from "./types/types";
+import { City } from './types/types';
 
 export enum AppRoute {
   Main = '/',
@@ -127,21 +127,6 @@ export enum Sort {
   priceAsc = 'Price: low to high',
   priceDesc = 'Price: high to low',
   topRating = 'Top rated first'
-}
-
-export enum APIRoute {
-  Offers = '/offers',
-  Login = '/login',
-  Logout = '/logout',
-  NearOffers = '/offers/{offerId}/nearby',
-  Comments = '/comments/',
-}
-
-export enum NameSpace {
-  User = 'USER',
-  Data = 'DATA',
-  City = 'CITY',
-  Sort = 'SORT',
 }
 
 export const DefaultCity: City = {

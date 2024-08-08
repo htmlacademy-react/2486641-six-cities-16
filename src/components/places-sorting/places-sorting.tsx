@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { NameSpace, Sort } from '../../const';
+import { Sort } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSort } from '../../store/sort/sort';
+import { NameSpace } from '../../store/const';
 
 function PlacesSorting(): JSX.Element {
   const activeSort = useAppSelector((state) => state[NameSpace.Sort].sort);

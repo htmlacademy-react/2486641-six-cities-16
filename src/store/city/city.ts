@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { DefaultCity, NameSpace } from "../../const";
-import { City } from "../../types/types";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { DefaultCity } from '../../const';
+import { City } from '../../types/types';
+import { NameSpace } from '../const';
 
 type InitialState = {
   city: City;
@@ -8,7 +9,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   city: DefaultCity,
-}
+};
 
 export const city = createSlice({
   name: NameSpace.City,

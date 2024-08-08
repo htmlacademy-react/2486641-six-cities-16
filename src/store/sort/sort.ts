@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { NameSpace, Sort } from "../../const";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Sort } from '../../const';
+import { NameSpace } from '../const';
 
 type InitialState = {
   sort: Sort;
@@ -7,7 +8,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   sort: Sort.popular,
-}
+};
 
 export const sort = createSlice({
   name: NameSpace.Sort,

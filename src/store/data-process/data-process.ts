@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
 import { DataProcess } from '../../types/state';
 import { fetchComments, fetchNearOffersAction, fetchOffersAction, getOfferAction } from '../api-actions';
+import { NameSpace } from '../const';
 
 const initialState: DataProcess = {
   offers: [],
