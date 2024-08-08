@@ -15,7 +15,7 @@ export const sort = createSlice({
   initialState,
   reducers: {
     setSort: (state, action: PayloadAction<{sort: Sort}>) => {
-      state.sort = action.payload;
+      state.sort = action.payload.sort;
     }
   }
 });
