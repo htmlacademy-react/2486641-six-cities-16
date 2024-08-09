@@ -11,17 +11,26 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/data-process/selectors';
+import ErrorScreen from '../../pages/error-screen/error-screen';
 
 type AppProps = {
   favoriteOffers: Offers;
 }
 
 function App({favoriteOffers}: AppProps): JSX.Element {
-  const authStatus: AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authStatus: AuthorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const hasError = useAppSelector(getErrorStatus);
   if (isOffersDataLoading) {
     return (
       <LoadingScreen />
+    );
+  }
+  if (hasError) {
+    return (
+      <ErrorScreen />
     );
   }
   return (

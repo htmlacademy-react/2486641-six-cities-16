@@ -1,3 +1,6 @@
+import { Cities } from './store/city/const';
+import { City } from './types/types';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -127,10 +130,4 @@ export enum Sort {
   topRating = 'Top rated first'
 }
 
-export enum APIRoute {
-  Offers = '/offers',
-  Login = '/login',
-  Logout = '/logout',
-  NearOffers = '/offers/{offerId}/nearby',
-  Comments = '/comments/',
-}
+export const DefaultCity: City = Cities['Paris'];

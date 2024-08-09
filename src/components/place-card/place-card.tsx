@@ -3,6 +3,7 @@ import { Offer } from '../../types/types';
 import PremiumMark from '../premium-mark/premium-mark';
 import { AppRoute, BookmarkButtonDisplayMode, CardDisplayMode, CardSettings } from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';
+import { memo } from 'react';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -10,7 +11,7 @@ type PlaceCardProps = {
   displayMode: CardDisplayMode;
 }
 
-function PlaceCard({offer, onMouseOver, displayMode}: PlaceCardProps): JSX.Element {
+function PlaceCardComponent({offer, onMouseOver, displayMode}: PlaceCardProps): JSX.Element {
   const {cardClass, imgDivClass, imgWidth, imgHeight, infoClass} = CardSettings[displayMode];
   const linkToOffer = AppRoute.Offer.replace(':id', offer.id);
   return(
@@ -48,4 +49,4 @@ function PlaceCard({offer, onMouseOver, displayMode}: PlaceCardProps): JSX.Eleme
   );
 }
 
-export default PlaceCard;
+export const PlaceCard = memo(PlaceCardComponent);

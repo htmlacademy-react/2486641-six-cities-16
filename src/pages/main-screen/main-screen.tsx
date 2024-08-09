@@ -1,32 +1,38 @@
-import { useState } from 'react';
-import { CardDisplayMode } from '../../const';
+import { useCallback, useState } from 'react';
+import { CardDisplayMode, Sort } from '../../const';
 import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
-import PlaceList from '../../components/place-list/place-list';
 import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/action';
-import PlacesSorting from '../../components/places-sorting/places-sorting';
+import { PlacesSorting } from '../../components/places-sorting/places-sorting';
 import { SortRules } from '../../utils/sort';
-import { mockCities } from '../../mocks/cities';
+import { getOffers } from '../../store/data-process/selectors';
+import { changeCity } from '../../store/city/city';
+import PlaceList from '../../components/place-list/place-list';
+import { getCity } from '../../store/city/selectors';
+import { Cities } from '../../store/city/const';
 
 function MainScreen(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city);
-  const activeSort = useAppSelector((state) => state.sort);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getCity);
+  const [activeSort, setSort] = useState(Sort.popular);
+  const handleChangeSort = useCallback((sort: Sort) => {
+    setSort(sort);
+  }, []);
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
-  const handleMouseOver = (offer?: Offer) => {
+  const handleChangeActiveCard = useCallback((offer?: Offer) => {
     setActiveCard(offer || null);
-  };
+  }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
+  const cities = Object.entries(Cities).map((item) => item[1]);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CityList activeCity={activeCity} cities={mockCities} onSelectCity={handleSelectCity}/>
+          <CityList activeCity={activeCity} cities={cities} onSelectCity={handleSelectCity}/>
         </section>
       </div>
       <div className="cities">
@@ -34,8 +40,8 @@ function MainScreen(): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{filteredOffers.length} places to stay in {activeCity?.name}</b>
-            <PlacesSorting />
-            <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleMouseOver}/>
+            <PlacesSorting activeSort={activeSort} onChangeSort={handleChangeSort}/>
+            <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleChangeActiveCard}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
