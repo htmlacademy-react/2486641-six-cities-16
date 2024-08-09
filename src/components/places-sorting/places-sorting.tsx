@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Sort } from '../../const';
 
 type PlacesSortingProps = {
@@ -6,7 +6,7 @@ type PlacesSortingProps = {
   onChangeSort: (sort: Sort) => void;
 }
 
-function PlacesSorting({activeSort, onChangeSort}: PlacesSortingProps): JSX.Element {
+function PlacesSortingComponent({activeSort, onChangeSort}: PlacesSortingProps): JSX.Element {
   const [sortOpened, setSortOpened] = useState(false);
   const handleSortOpened = () => setSortOpened(!sortOpened);
   const handleSetSort = (value: Sort) => {
@@ -39,4 +39,4 @@ function PlacesSorting({activeSort, onChangeSort}: PlacesSortingProps): JSX.Elem
   );
 }
 
-export default PlacesSorting;
+export const PlacesSorting = memo(PlacesSortingComponent);

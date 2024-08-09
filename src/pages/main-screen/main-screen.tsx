@@ -4,7 +4,7 @@ import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
 import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import PlacesSorting from '../../components/places-sorting/places-sorting';
+import { PlacesSorting } from '../../components/places-sorting/places-sorting';
 import { SortRules } from '../../utils/sort';
 import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
@@ -16,9 +16,9 @@ function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCity);
   const [activeSort, setSort] = useState(Sort.popular);
-  const handleChangeSort = (sort: Sort) => {
+  const handleChangeSort = useCallback((sort: Sort) => {
     setSort(sort);
-  };
+  }, []);
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
   const handleChangeActiveCard = useCallback((offer?: Offer) => {
