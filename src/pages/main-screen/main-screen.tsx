@@ -6,12 +6,12 @@ import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import { SortRules } from '../../utils/sort';
-import { mockCities } from '../../mocks/cities';
 import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
 import PlaceList from '../../components/place-list/place-list';
 import { getCity } from '../../store/city/selectors';
 import { getSort } from '../../store/sort/selectors';
+import { Cities } from '../../store/city/const';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
@@ -24,12 +24,13 @@ function MainScreen(): JSX.Element {
   }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
+  const cities = Object.entries(Cities).map((item) => item[1]);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CityList activeCity={activeCity} cities={mockCities} onSelectCity={handleSelectCity}/>
+          <CityList activeCity={activeCity} cities={cities} onSelectCity={handleSelectCity}/>
         </section>
       </div>
       <div className="cities">

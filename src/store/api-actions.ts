@@ -52,7 +52,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const getOfferAction = createAsyncThunk<OfferInfo, string, {
+export const getOfferAction = createAsyncThunk<OfferInfo, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
