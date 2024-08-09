@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { CardDisplayMode } from '../../const';
+import { CardDisplayMode, Sort } from '../../const';
 import { City, Offer } from '../../types/types';
 import Map from '../../components/map/map';
 import CityList from '../../components/city-list/city-list';
@@ -10,16 +10,18 @@ import { getOffers } from '../../store/data-process/selectors';
 import { changeCity } from '../../store/city/city';
 import PlaceList from '../../components/place-list/place-list';
 import { getCity } from '../../store/city/selectors';
-import { getSort } from '../../store/sort/selectors';
 import { Cities } from '../../store/city/const';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCity);
-  const activeSort = useAppSelector(getSort);
+  const [activeSort, setSort] = useState(Sort.popular);
+  const handleChangeSort = (sort: Sort) => {
+    setSort(sort);
+  };
   const dispatch = useAppDispatch();
   const [activeCard, setActiveCard] = useState<Offer | null>(null);
-  const handleMouseOver = useCallback((offer?: Offer) => {
+  const handleChangeActiveCard = useCallback((offer?: Offer) => {
     setActiveCard(offer || null);
   }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
@@ -38,8 +40,8 @@ function MainScreen(): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{filteredOffers.length} places to stay in {activeCity?.name}</b>
-            <PlacesSorting />
-            <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleMouseOver}/>
+            <PlacesSorting activeSort={activeSort} onChangeSort={handleChangeSort}/>
+            <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleChangeActiveCard}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">

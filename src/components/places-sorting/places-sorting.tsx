@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Sort } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSort } from '../../store/sort/sort';
-import { getSort } from '../../store/sort/selectors';
 
-function PlacesSorting(): JSX.Element {
-  const activeSort = useAppSelector(getSort);
-  const dispatch = useAppDispatch();
+type PlacesSortingProps = {
+  activeSort: Sort;
+  onChangeSort: (sort: Sort) => void;
+}
+
+function PlacesSorting({activeSort, onChangeSort}: PlacesSortingProps): JSX.Element {
   const [sortOpened, setSortOpened] = useState(false);
   const handleSortOpened = () => setSortOpened(!sortOpened);
   const handleSetSort = (value: Sort) => {
-    dispatch(setSort({sort: value}));
+    onChangeSort(value);
     handleSortOpened();
   };
 
