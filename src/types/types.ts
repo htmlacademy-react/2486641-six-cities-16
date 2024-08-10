@@ -77,3 +77,8 @@ export type CommentData = {
   comment: Comment['comment'];
   rating: Comment['rating'];
 };
+
+export type FavoriteData = {
+  offerId: Offer['id'];
+  isFavorite: Offer['isFavorite'];
+};

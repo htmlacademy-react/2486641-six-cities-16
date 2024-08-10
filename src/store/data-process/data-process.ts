@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { DataProcess } from '../../types/state';
-import { fetchComments, fetchNearOffersAction, fetchOffersAction, getOfferAction } from '../api-actions';
+import { fetchComments, fetchFavorites, fetchNearOffersAction, fetchOffersAction, getOfferAction } from '../api-actions';
 import { NameSpace } from '../const';
 
 const initialState: DataProcess = {
@@ -10,6 +10,7 @@ const initialState: DataProcess = {
   comments: [],
   isOffersDataLoading: false,
   hasError: false,
+  favoriteOffers: [],
 };
 
 export const dataProcess = createSlice({
@@ -38,6 +39,9 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
         state.nearOffers = action.payload;
+      })
+      .addCase(fetchFavorites.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
       });
   },
 });

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getFavorites } from '../../store/data-process/selectors';
+import { getUser } from '../../store/user-process/selectors';
 
 type UserNavProps = {
   authStatus: AuthorizationStatus;
@@ -9,6 +11,8 @@ type UserNavProps = {
 
 function UserNav({authStatus}: UserNavProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const favoriteCount = useAppSelector(getFavorites).length;
+  const user = useAppSelector(getUser);
   return (
     <nav className="header__nav">
       {(authStatus === AuthorizationStatus.Auth)
@@ -18,8 +22,8 @@ function UserNav({authStatus}: UserNavProps): JSX.Element {
             <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__user-name user__name">{user?.email}</span>
+              <span className="header__favorite-count">{favoriteCount}</span>
             </Link>
           </li>
           <li className="header__nav-item">

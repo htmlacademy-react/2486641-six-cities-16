@@ -8,3 +8,4 @@ export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].h
 export const getNearOffers = (state: State): Offers => state[NameSpace.Data].nearOffers;
 export const getOffersInfo = (state: State): OfferInfo | undefined => state[NameSpace.Data].offerInfo;
 export const getComments = (state: State): Comments => state[NameSpace.Data].comments;
+export const getFavorites = (state: State): Offers => state[NameSpace.Data].favoriteOffers;

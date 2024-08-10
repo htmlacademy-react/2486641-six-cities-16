@@ -4,6 +4,7 @@ export enum APIRoute {
   Logout = '/logout',
   NearOffers = '/offers/{offerId}/nearby',
   Comments = '/comments/',
+  Favorite = '/favorite/',
 }
 
 export enum NameSpace {
