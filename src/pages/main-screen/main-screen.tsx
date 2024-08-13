@@ -6,7 +6,7 @@ import CityList from '../../components/city-list/city-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { PlacesSorting } from '../../components/places-sorting/places-sorting';
 import { SortRules } from '../../utils/sort';
-import { getOffers } from '../../store/data-process/selectors';
+import { getOffers } from '../../store/offers/selectors';
 import { changeCity } from '../../store/city/city';
 import PlaceList from '../../components/place-list/place-list';
 import { getCity } from '../../store/city/selectors';

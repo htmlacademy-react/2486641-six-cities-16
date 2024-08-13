@@ -1,15 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../const';
-import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
-import { UserProcess } from '../../types/state';
 import { NameSpace } from '../const';
+import { checkAuthAction, loginAction, logoutAction } from './thunks';
+import { UserData } from '../../types/types';
 
-const initialState: UserProcess = {
+type InitialState = {
+  authorizationStatus: AuthorizationStatus;
+  user: UserData | undefined;
+};
+
+const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: undefined,
 };
 
-export const userProcess = createSlice({
+export const user = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {},

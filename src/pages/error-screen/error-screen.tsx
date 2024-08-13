@@ -1,12 +1,12 @@
 import {useAppDispatch} from '../../hooks';
-import { fetchOffersAction } from '../../store/api-actions';
+import { fetchOffersAction } from '../../store/offers/thunks.ts';
 
 function ErrorScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
     <>
-      <p className="error__text">Не удалось загрузить вопросы</p>
+      <p className="error__text">Не удалось загрузить данные</p>
       <button
         onClick={() => {
           dispatch(fetchOffersAction());

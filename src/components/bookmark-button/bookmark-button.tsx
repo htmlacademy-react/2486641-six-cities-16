@@ -1,6 +1,6 @@
 import { BookmarkButtonDisplayMode, BookmarkButtonSettings } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { postFavorite } from '../../store/api-actions';
+import { postFavorite } from '../../store/offers/thunks.ts';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;

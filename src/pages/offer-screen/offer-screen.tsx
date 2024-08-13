@@ -7,10 +7,10 @@ import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
-import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
+import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/offers/thunks.ts';
 import { useEffect } from 'react';
-import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
-import { getComments, getNearOffers, getOffersInfo } from '../../store/data-process/selectors.ts';
+import { getAuthorizationStatus } from '../../store/user/selectors.ts';
+import { getComments, getNearOffers, getOffersInfo } from '../../store/offers/selectors.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
