@@ -49,17 +49,8 @@ export const offers = createSlice({
         state.isOffersDataLoading = false;
         state.hasError = true;
       })
-      .addCase(getOfferAction.pending, (state) => {
-        state.isOffersDataLoading = true;
-        state.hasError = false;
-      })
       .addCase(getOfferAction.fulfilled, (state, action) => {
         state.offerInfo = action.payload;
-        state.isOffersDataLoading = false;
-      })
-      .addCase(getOfferAction.rejected, (state) => {
-        state.isOffersDataLoading = false;
-        state.hasError = true;
       })
       .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
         state.nearOffers = action.payload;

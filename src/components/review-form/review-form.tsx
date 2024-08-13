@@ -1,8 +1,8 @@
 import { FormEvent, Fragment, useState } from 'react';
 import { Stars } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { postComment } from '../../store/offers/thunks.ts';
 import { CommentData, Offer } from '../../types/types';
+import { postComment } from '../../store/comments/thunks';
 
 type ReviewFormProps = {
   offerId: Offer['id'];

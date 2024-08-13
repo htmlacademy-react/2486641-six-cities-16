@@ -3,8 +3,8 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LogoDisplayMode } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFavorites } from '../../store/offers/selectors';
-import { fetchFavorites } from '../../store/offers/thunks.ts';
+import { fetchFavorites } from '../../store/favorites/thunks';
+import { getFavorites } from '../../store/favorites/selectors';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();

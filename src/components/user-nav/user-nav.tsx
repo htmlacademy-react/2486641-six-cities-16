@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/offers/thunks.ts';
-import { getFavorites } from '../../store/offers/selectors';
 import { getUser } from '../../store/user/selectors';
+import { getFavorites } from '../../store/favorites/selectors';
+import { logoutAction } from '../../store/user/thunks';
 
 type UserNavProps = {
   authStatus: AuthorizationStatus;

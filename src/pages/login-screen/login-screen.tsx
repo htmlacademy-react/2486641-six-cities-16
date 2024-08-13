@@ -2,7 +2,7 @@ import { LogoDisplayMode } from '../../const';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
-import { loginAction } from '../../store/offers/thunks.ts';
+import { loginAction } from '../../store/user/thunks';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
