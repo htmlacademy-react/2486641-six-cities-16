@@ -4,22 +4,17 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
-import { Offers } from '../../types/types';
 import Layout from '../layout/layout';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/offers/selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 
-type AppProps = {
-  favoriteOffers: Offers;
-}
-
-function App({favoriteOffers}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authStatus: AuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
@@ -60,7 +55,7 @@ function App({favoriteOffers}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authStatus}
               >
-                <FavoritesScreen favoriteOffers={favoriteOffers}/>
+                <FavoritesScreen />
               </PrivateRoute>
             }
           />

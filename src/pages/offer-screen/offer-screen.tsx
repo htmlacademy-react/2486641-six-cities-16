@@ -7,10 +7,12 @@ import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import NotFoundScreen from '../not-found-screen/not-found-screen.tsx';
-import { fetchComments, fetchNearOffersAction, getOfferAction } from '../../store/api-actions.ts';
+import { fetchNearOffersAction, getOfferAction } from '../../store/offers/thunks.ts';
 import { useEffect } from 'react';
-import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
-import { getComments, getNearOffers, getOffersInfo } from '../../store/data-process/selectors.ts';
+import { getAuthorizationStatus } from '../../store/user/selectors.ts';
+import { getNearOffers, getOffersInfo } from '../../store/offers/selectors.ts';
+import { fetchComments } from '../../store/comments/thunks.ts';
+import { getComments } from '../../store/comments/selectors.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -54,7 +56,7 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <BookmarkButton displayMode={BookmarkButtonDisplayMode.offer} isFavorite={offer.isFavorite} />
+              <BookmarkButton displayMode={BookmarkButtonDisplayMode.offer} isFavorite={offer.isFavorite} offerId={offer.id}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">

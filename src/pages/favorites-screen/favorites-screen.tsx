@@ -1,14 +1,17 @@
-import { Fragment } from 'react';
-import { Offers } from '../../types/types';
+import { Fragment, useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LogoDisplayMode } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavorites } from '../../store/favorites/thunks';
+import { getFavorites } from '../../store/favorites/selectors';
 
-type FavoritesScreenProps = {
-  favoriteOffers: Offers;
-}
-
-function FavoritesScreen({favoriteOffers}: FavoritesScreenProps): JSX.Element {
+function FavoritesScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
+  const favoriteOffers = useAppSelector(getFavorites);
   return(
     <Fragment>
       <main className="page__main page__main--favorites">
