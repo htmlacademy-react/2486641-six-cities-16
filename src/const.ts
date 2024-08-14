@@ -71,7 +71,6 @@ export const CardListClass = {
   [CardDisplayMode.near]: 'near-places__list places__list',
 };
 
-
 export enum LogoDisplayMode {
   header,
   footer
@@ -131,3 +130,8 @@ export enum Sort {
 }
 
 export const DefaultCity: City = Cities['Paris'];
+
+export const PageClass = {
+  main: 'page--gray page--main',
+  login: 'page--gray page--login',
+};
