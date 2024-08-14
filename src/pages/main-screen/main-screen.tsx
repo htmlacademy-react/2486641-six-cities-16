@@ -29,7 +29,7 @@ function MainScreen(): JSX.Element {
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
   const cities = Object.entries(Cities).map((item) => item[1]);
   return (
-    <main className="page__main page__main--index">
+    <main className={`page__main page__main--index ${(filteredOffers.length) ? '' : 'page__main--index-empty'}`}>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
@@ -50,7 +50,10 @@ function MainScreen(): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                {<Map city={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />}
+                {(filteredOffers.length)
+                  ? <Map city={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />
+                  : ''
+                }
               </section>
             </div>
           </div>
