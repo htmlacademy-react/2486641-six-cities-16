@@ -29,7 +29,7 @@ function LoginScreen(): JSX.Element {
                 type="email"
                 name="email"
                 placeholder="Email"
-                required={false}
+                required={true}
                 ref={loginRef}
               >
               </input>
@@ -41,8 +41,10 @@ function LoginScreen(): JSX.Element {
                 type="password"
                 name="password"
                 placeholder="Password"
-                required={false}
+                required={true}
                 ref={passwordRef}
+                pattern='/^(?=.*\d)(?=.*[A-Za-z]).*$/'
+                title='Пароль должен состоять минимум из одной буквы и цифры'
               >
               </input>
             </div>
