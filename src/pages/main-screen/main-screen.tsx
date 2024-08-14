@@ -42,7 +42,9 @@ function MainScreen(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredOffers.length} places to stay in {activeCity?.name}</b>
+              <b className="places__found">
+                {`${filteredOffers.length} ${(filteredOffers.length === 1) ? 'place' : 'places'} to stay in ${activeCity?.name}`}
+              </b>
               <PlacesSorting activeSort={activeSort} onChangeSort={handleChangeSort}/>
               <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleChangeActiveCard}/>
             </section>

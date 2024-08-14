@@ -11,16 +11,17 @@ function Layout({authStatus}: LayoutProps): JSX.Element {
   const currentPage = useLocation().pathname;
   let pageClass = 'page ';
   switch (currentPage) {
-    case AppRoute.Main: 
+    case AppRoute.Main:
       pageClass += PageClass.main;
       break;
-    case AppRoute.Login: 
+    case AppRoute.Login:
       pageClass += PageClass.login;
       break;
   }
   return (
     <div
-      className={pageClass}>
+      className={pageClass}
+    >
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

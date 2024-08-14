@@ -1,6 +1,8 @@
-import { BookmarkButtonDisplayMode, BookmarkButtonSettings } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus, BookmarkButtonDisplayMode, BookmarkButtonSettings } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postFavorite } from '../../store/favorites/thunks';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
@@ -11,12 +13,18 @@ type BookmarkButtonProps = {
 function BookmarkButton({displayMode, isFavorite, offerId}: BookmarkButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const {classPrefix, imgHeight, imgWidth} = BookmarkButtonSettings[displayMode];
+  const navigate = useNavigate();
+  const authStatus = useAppSelector(getAuthorizationStatus);
   return (
     <button
       className={`${classPrefix}__bookmark-button button ${isFavorite && `${classPrefix}__bookmark-button--active button`}`}
       type="button"
       onClick={() => {
-        dispatch(postFavorite({offerId, isFavorite: !isFavorite}));
+        if (authStatus !== AuthorizationStatus.Auth) {
+          navigate(AppRoute.Login);
+        } else {
+          dispatch(postFavorite({offerId, isFavorite: !isFavorite}));
+        }
       }}
     >
       <svg className={`${classPrefix}__bookmark-icon`} width={imgWidth} height={imgHeight}>
