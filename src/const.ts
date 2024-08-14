@@ -135,3 +135,5 @@ export const PageClass = {
   main: 'page--gray page--main',
   login: 'page--gray page--login',
 };
+
+export const PASSWORD_PATTERN = '^(?=.*[0-9])(?=.*[A-Za-z]).*$';

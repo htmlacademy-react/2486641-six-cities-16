@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
 import { loginAction } from '../../store/user/thunks';
+import { PASSWORD_PATTERN } from '../../const';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -29,7 +30,7 @@ function LoginScreen(): JSX.Element {
                 type="email"
                 name="email"
                 placeholder="Email"
-                required={true}
+                required
                 ref={loginRef}
               >
               </input>
@@ -41,10 +42,10 @@ function LoginScreen(): JSX.Element {
                 type="password"
                 name="password"
                 placeholder="Password"
-                required={true}
+                required
                 ref={passwordRef}
-                pattern='/^(?=.*\d)(?=.*[A-Za-z]).*$/'
-                title='Пароль должен состоять минимум из одной буквы и цифры'
+                pattern={PASSWORD_PATTERN}
+                title="Пароль должен состоять минимум из одной буквы и цифры"
               >
               </input>
             </div>

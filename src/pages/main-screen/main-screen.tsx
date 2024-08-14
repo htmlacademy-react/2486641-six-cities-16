@@ -52,8 +52,7 @@ function MainScreen(): JSX.Element {
               <section className="cities__map map">
                 {(filteredOffers.length)
                   ? <Map city={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />
-                  : ''
-                }
+                  : ''}
               </section>
             </div>
           </div>
