@@ -134,6 +134,7 @@ export const DefaultCity: City = Cities['Paris'];
 export const PageClass = {
   main: 'page--gray page--main',
   login: 'page--gray page--login',
+  favoritesEmpty: 'page--favorites-empty'
 };
 
 export const PASSWORD_PATTERN = '^(?=.*[0-9])(?=.*[A-Za-z]).*$';

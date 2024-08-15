@@ -4,6 +4,7 @@ import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 import { setFavoriteOffer, setOfferInfo } from '../offers/offers';
+import { deleteFavorite } from './favorites';
 
 export const postFavorite = createAsyncThunk<void, FavoriteData, {
   dispatch: AppDispatch;
@@ -15,6 +16,9 @@ export const postFavorite = createAsyncThunk<void, FavoriteData, {
     const {data} = await api.post<OfferInfo>(`${APIRoute.Favorite }/${ offerId }/${ Number(isFavorite)}`);
     dispatch(setOfferInfo(data));
     dispatch(setFavoriteOffer(data));
+    if (!data.isFavorite) {
+      dispatch(deleteFavorite(data));
+    }
   },
 );
 

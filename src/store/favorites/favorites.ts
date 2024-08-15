@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Offers } from '../../types/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { OfferInfo, Offers } from '../../types/types';
 import { NameSpace } from '../const';
 import { fetchFavorites } from './thunks';
 
@@ -14,7 +14,16 @@ const initialState: InitialState = {
 export const favorites = createSlice({
   name: NameSpace.Favorites,
   initialState,
-  reducers: {},
+  reducers: {
+    deleteFavorite: (state, action: PayloadAction<OfferInfo>) => {
+      for (let i = 0, len = state.favorites.length; i < len; i++) {
+        if (state.favorites[i].id === action.payload.id) {
+          state.favorites.splice(i, 1);
+          break;
+        }
+      }
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchFavorites.fulfilled, (state, action) => {
@@ -22,3 +31,5 @@ export const favorites = createSlice({
       });
   },
 });
+
+export const { deleteFavorite } = favorites.actions;
