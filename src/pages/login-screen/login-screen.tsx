@@ -1,7 +1,11 @@
 import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
 import { loginAction } from '../../store/user/thunks';
-import { PASSWORD_PATTERN } from '../../const';
+import { AppRoute, PASSWORD_PATTERN } from '../../const';
+import { Cities } from '../../store/city/const';
+import { getRandomInt } from '../../utils/utils';
+import { Link } from 'react-router-dom';
+import { changeCity } from '../../store/city/city';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -17,6 +21,7 @@ function LoginScreen(): JSX.Element {
       }));
     }
   };
+  const randomCity = Object.values(Cities)[getRandomInt(6)];
   return(
     <main className="page__main page__main--login">
       <div className="page__login-container container">
@@ -54,9 +59,15 @@ function LoginScreen(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>Amsterdam</span>
-            </a>
+            <Link
+              className="locations__item-link"
+              to={AppRoute.Main}
+              onClick={() => {
+                dispatch(changeCity({city: randomCity}));
+              }}
+            >
+              <span>{randomCity.name}</span>
+            </Link>
           </div>
         </section>
       </div>

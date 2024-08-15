@@ -1,5 +1,5 @@
 import { FormEvent, Fragment, useState } from 'react';
-import { Stars } from '../../const';
+import { DEFAULT_RATING, Stars } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData, Offer } from '../../types/types';
 import { postComment } from '../../store/comments/thunks';
@@ -11,9 +11,8 @@ type ReviewFormProps = {
 
 function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const [review, setReview] = useState<CommentData>({rating: 0, comment: '', offerId: offerId});
+  const [review, setReview] = useState<CommentData>({rating: DEFAULT_RATING, comment: '', offerId: offerId});
   const onRatingChange = (evt: React.FormEvent): void => {
-    console.log(evt.target.value);
     if (evt.target instanceof HTMLInputElement) {
       setReview({...review, rating: Number(evt.target.value)});
     }
@@ -23,8 +22,11 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
     evt.preventDefault();
 
     if (review.rating !== null && review.comment !== null) {
-      dispatch(postComment(review));
-      setReview({...review, comment: '', rating: 0});
+      dispatch(postComment(review))
+        .unwrap()
+        .then(() => {
+          setReview({...review, comment: '', rating: DEFAULT_RATING});
+        });
     }
   };
   const isPosting = useAppSelector(getPostingStatus);
@@ -44,6 +46,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
               onChange={onRatingChange}
               required
               disabled={isPosting}
+              checked={(star.value === review.rating)}
             >
             </input>
             <label
@@ -67,6 +70,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
         maxLength={300}
         onChange={onTextChange}
         value={review.comment}
+        disabled={isPosting}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

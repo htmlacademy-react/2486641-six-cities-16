@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OfferInfo, Offers } from '../../types/types';
 import { NameSpace } from '../const';
-import { fetchFavorites } from './thunks';
+import { fetchFavoritesAction } from './thunks';
 
 type InitialState ={
   favorites: Offers;
@@ -26,7 +26,7 @@ export const favorites = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchFavorites.fulfilled, (state, action) => {
+      .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
       });
   },

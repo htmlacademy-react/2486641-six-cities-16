@@ -1,16 +1,11 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LogoDisplayMode } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavorites } from '../../store/favorites/thunks';
+import { useAppSelector } from '../../hooks';
 import { getFavorites } from '../../store/favorites/selectors';
 
 function FavoritesScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [dispatch]);
   const favoriteOffers = useAppSelector(getFavorites);
   return(
     (favoriteOffers.length)

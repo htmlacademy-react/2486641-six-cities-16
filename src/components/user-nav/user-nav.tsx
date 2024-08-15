@@ -11,7 +11,7 @@ type UserNavProps = {
 
 function UserNav({authStatus}: UserNavProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const favoriteCount = useAppSelector(getFavorites).length;
+  const favorites = useAppSelector(getFavorites);
   const user = useAppSelector(getUser);
   return (
     <nav className="header__nav">
@@ -23,7 +23,7 @@ function UserNav({authStatus}: UserNavProps): JSX.Element {
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">{user?.email}</span>
-              <span className="header__favorite-count">{favoriteCount}</span>
+              <span className="header__favorite-count">{favorites.length}</span>
             </Link>
           </li>
           <li className="header__nav-item">

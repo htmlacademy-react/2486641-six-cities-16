@@ -11,3 +11,5 @@ export const getOffersGroupByCity = (offers: Offers) =>
     // Возвращение объекта для следующего шага
     return result;
   }, {});
+
+export const getRandomInt = (max: number) => Math.floor(Math.random() * max);

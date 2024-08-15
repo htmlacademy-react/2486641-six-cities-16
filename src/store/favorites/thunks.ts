@@ -6,12 +6,12 @@ import { APIRoute } from '../const';
 import { setFavoriteOffer, setOfferInfo } from '../offers/offers';
 import { deleteFavorite } from './favorites';
 
-export const postFavorite = createAsyncThunk<void, FavoriteData, {
+export const postFavoriteAction = createAsyncThunk<void, FavoriteData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/postFavorite',
+  'data/postFavoriteAction',
   async ({offerId, isFavorite}, {dispatch, extra: api}) => {
     const {data} = await api.post<OfferInfo>(`${APIRoute.Favorite }/${ offerId }/${ Number(isFavorite)}`);
     dispatch(setOfferInfo(data));
@@ -22,12 +22,12 @@ export const postFavorite = createAsyncThunk<void, FavoriteData, {
   },
 );
 
-export const fetchFavorites = createAsyncThunk<Offers, undefined, {
+export const fetchFavoritesAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchFavorites',
+  'data/fetchFavoritesAction',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<Offers>(APIRoute.Favorite);
     return data;
