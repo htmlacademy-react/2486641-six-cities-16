@@ -1,8 +1,9 @@
 import { FormEvent, Fragment, useState } from 'react';
 import { Stars } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData, Offer } from '../../types/types';
 import { postComment } from '../../store/comments/thunks';
+import { getPostingStatus } from '../../store/comments/selectors';
 
 type ReviewFormProps = {
   offerId: Offer['id'];
@@ -12,6 +13,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [review, setReview] = useState<CommentData>({rating: 0, comment: '', offerId: offerId});
   const onRatingChange = (evt: React.FormEvent): void => {
+    console.log(evt.target.value);
     if (evt.target instanceof HTMLInputElement) {
       setReview({...review, rating: Number(evt.target.value)});
     }
@@ -25,6 +27,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
       setReview({...review, comment: '', rating: 0});
     }
   };
+  const isPosting = useAppSelector(getPostingStatus);
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -39,6 +42,8 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
               id={`${star.value}-stars`}
               type="radio"
               onChange={onRatingChange}
+              required
+              disabled={isPosting}
             >
             </input>
             <label
@@ -58,6 +63,8 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        minLength={50}
+        maxLength={300}
         onChange={onTextChange}
         value={review.comment}
       />
@@ -65,7 +72,13 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={false}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!(review.rating > 0 && review.comment.length > 50 && review.comment.length < 300 && !isPosting)}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

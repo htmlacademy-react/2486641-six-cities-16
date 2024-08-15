@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
-import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
+import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode, OFFER_IMAGE_COUNT } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
@@ -39,7 +39,7 @@ function OfferScreen(): JSX.Element {
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {offer.images.map((image) => (
+            {offer.images.slice(0, OFFER_IMAGE_COUNT).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img className="offer__image" src={image} alt="Photo studio"></img>
               </div>
@@ -60,7 +60,7 @@ function OfferScreen(): JSX.Element {
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{width: `${(offer.rating) ? offer.rating * 20 : 0}%`}}></span>
+                <span style={{width: `${Math.round(offer.rating * 2) * 10}%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{offer.rating}</span>

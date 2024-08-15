@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CommentData, Comments } from '../../types/types';
+import { Comment, CommentData, Comments } from '../../types/types';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
@@ -19,14 +19,14 @@ export const fetchComments = createAsyncThunk<Comments, string | undefined, {
   },
 );
 
-export const postComment = createAsyncThunk<void, CommentData, {
+export const postComment = createAsyncThunk<Comment, CommentData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/postComment',
-  async ({offerId, comment, rating}, {dispatch, extra: api}) => {
-    await api.post<Comment>(APIRoute.Comments + offerId, {comment, rating});
-    dispatch(fetchComments(offerId));
+  async ({offerId, comment, rating}, {extra: api}) => {
+    const {data} = await api.post<Comment>(APIRoute.Comments + offerId, {comment, rating});
+    return data;
   },
 );
