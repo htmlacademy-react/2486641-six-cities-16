@@ -1,12 +1,13 @@
+import { makeFakeOffer } from '../../utils/mock';
 import { offers } from './offers';
 
 describe('Favorites Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {
-      offers: [],
+      offers: [makeFakeOffer()],
       offerInfo: undefined,
-      nearOffers: [],
+      nearOffers: [makeFakeOffer()],
       isOffersDataLoading: true,
       hasError: true,
     };
