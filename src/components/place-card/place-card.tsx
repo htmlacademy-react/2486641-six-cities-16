@@ -4,6 +4,7 @@ import PremiumMark from '../premium-mark/premium-mark';
 import { AppRoute, BookmarkButtonDisplayMode, CardDisplayMode, CardSettings } from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { memo } from 'react';
+import { calcStarsWidthPercent, ucFirst } from '../../utils/utils';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -36,14 +37,14 @@ function PlaceCardComponent({offer, onMouseOver, displayMode}: PlaceCardProps): 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${Math.round(offer.rating * 2) * 10}%`}}></span>
+            <span style={{width: calcStarsWidthPercent(offer.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <Link to={linkToOffer}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{ucFirst(offer.type)}</p>
       </div>
     </article>
   );

@@ -13,3 +13,13 @@ export const getOffersGroupByCity = (offers: Offers) =>
   }, {});
 
 export const getRandomInt = (max: number) => Math.floor(Math.random() * max);
+
+export const ucFirst = (str: string) => {
+  if (!str) {
+    return str;
+  }
+
+  return str[0].toUpperCase() + str.slice(1);
+};
+
+export const calcStarsWidthPercent = (rating: number): string => `${Math.round(rating * 2) * 10}%`;

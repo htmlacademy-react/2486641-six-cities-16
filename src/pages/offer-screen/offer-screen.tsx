@@ -13,6 +13,7 @@ import { getAuthorizationStatus } from '../../store/user/selectors.ts';
 import { getNearOffers, getOffersInfo } from '../../store/offers/selectors.ts';
 import { fetchComments } from '../../store/comments/thunks.ts';
 import { getComments } from '../../store/comments/selectors.ts';
+import { calcStarsWidthPercent, ucFirst } from '../../utils/utils.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -60,15 +61,14 @@ function OfferScreen(): JSX.Element {
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{width: `${Math.round(offer.rating * 2) * 10}%`}}></span>
+                <span style={{width: calcStarsWidthPercent(offer.rating)}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{offer.rating}</span>
             </div>
             <ul className="offer__features">
               <li className="offer__feature offer__feature--entire">
-                {/* TODO: С заглавной буквы */}
-                {offer.type}
+                {ucFirst(offer.type)}
               </li>
               <li className="offer__feature offer__feature--bedrooms">
                 {/* TODO: Bedroom/Bedrooms */}

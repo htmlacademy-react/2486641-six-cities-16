@@ -13,7 +13,7 @@ export const postFavoriteAction = createAsyncThunk<void, FavoriteData, {
 }>(
   'data/postFavoriteAction',
   async ({offerId, isFavorite}, {dispatch, extra: api}) => {
-    const {data} = await api.post<OfferInfo>(`${APIRoute.Favorite }/${ offerId }/${ Number(isFavorite)}`);
+    const {data} = await api.post<OfferInfo>(`${APIRoute.Favorite }/${offerId}/${Number(isFavorite)}`);
     dispatch(setOfferInfo(data));
     dispatch(setFavoriteOffer(data));
     if (!data.isFavorite) {
