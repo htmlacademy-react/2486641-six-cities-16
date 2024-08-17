@@ -66,7 +66,6 @@ export const offers = createSlice({
         state.hasError = true;
       })
       .addCase(getOfferAction.pending, () => {
-        //state.offerInfo = action.payload;
       })
       .addCase(getOfferAction.fulfilled, (state, action) => {
         state.offerInfo = action.payload;

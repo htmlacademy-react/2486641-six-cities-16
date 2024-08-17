@@ -71,7 +71,6 @@ export const postFavoriteAction = createAsyncThunk<void, FavoriteData, {
     } else {
       dispatch(deleteFavorite(data));
     }
-    //dispatch(fetchFavoritesAction());
   },
 );
 

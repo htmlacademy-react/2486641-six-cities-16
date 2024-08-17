@@ -1,6 +1,3 @@
-import { Cities } from './store/city/const';
-import { City } from './types/types';
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -133,8 +130,6 @@ export enum Sort {
   PriceDesc = 'Price: high to low',
   TopRating = 'Top rated first'
 }
-
-export const DefaultCity: City = Cities['Paris'];
 
 export const PageClass = {
   Main: 'page--gray page--main',

@@ -47,4 +47,4 @@ export const Cities = {
       'zoom': 13
     }
   }
-};
+} as const;

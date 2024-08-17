@@ -24,7 +24,6 @@ function BookmarkButton({displayMode, isFavorite, offerId}: BookmarkButtonProps)
           navigate(AppRoute.Login);
         } else {
           dispatch(postFavoriteAction({offerId, isFavorite: !isFavorite}));
-          //dispatch(fetchFavoritesAction());
         }
       }}
     >

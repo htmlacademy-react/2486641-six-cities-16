@@ -1,3 +1,4 @@
+import { Cities } from '../store/city/const';
 import { Offer, Offers } from '../types/types';
 
 export const getOffersGroupByCity = (offers: Offers) =>
@@ -12,7 +13,9 @@ export const getOffersGroupByCity = (offers: Offers) =>
     return result;
   }, {});
 
-export const getRandomInt = (max: number) => Math.floor(Math.random() * max);
+const getRandomInt = (max: number) => Math.floor(Math.random() * max);
+
+export const getRandomCity = () => Object.values(Cities)[getRandomInt(Object.values(Cities).length)];
 
 export const ucFirst = (str: string) => {
   if (!str) {

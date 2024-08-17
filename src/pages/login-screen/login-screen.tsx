@@ -2,8 +2,7 @@ import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
 import { loginAction } from '../../store/user/thunks';
 import { AppRoute, PASSWORD_PATTERN } from '../../const';
-import { Cities } from '../../store/city/const';
-import { getRandomInt } from '../../utils/utils';
+import { getRandomCity } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { changeCity } from '../../store/city/city';
 
@@ -21,7 +20,7 @@ function LoginScreen(): JSX.Element {
       }));
     }
   };
-  const randomCity = Object.values(Cities)[getRandomInt(Object.values(Cities).length)];
+  const randomCity = getRandomCity();
   return(
     <main className="page__main page__main--login">
       <div className="page__login-container container">
