@@ -25,7 +25,7 @@ function FavoritesScreen(): JSX.Element {
           </div>
         </main>
         <footer className="footer container">
-          <Logo displayMode={LogoDisplayMode.footer}/>
+          <Logo displayMode={LogoDisplayMode.Footer}/>
         </footer>
       </Fragment>
       :

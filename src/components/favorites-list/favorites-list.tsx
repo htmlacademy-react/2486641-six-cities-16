@@ -20,7 +20,7 @@ function FavoritesList({favoriteOffers}: FavoritesListProps): JSX.Element {
               </a>
             </div>
           </div>
-          <PlaceList offers={value} displayMode={CardDisplayMode.favorite}/>
+          <PlaceList offers={value} displayMode={CardDisplayMode.Favorite}/>
         </li>
       ))}
     </ul>

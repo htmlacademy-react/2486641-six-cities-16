@@ -16,7 +16,7 @@ import EmptyOffers from '../../components/empty-offers/empty-offers';
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCity);
-  const [activeSort, setSort] = useState(Sort.popular);
+  const [activeSort, setSort] = useState(Sort.Popular);
   const handleChangeSort = useCallback((sort: Sort) => {
     setSort(sort);
   }, []);
@@ -46,7 +46,7 @@ function MainScreen(): JSX.Element {
                 {`${filteredOffers.length} ${(filteredOffers.length === 1) ? 'place' : 'places'} to stay in ${activeCity?.name}`}
               </b>
               <PlacesSorting activeSort={activeSort} onChangeSort={handleChangeSort}/>
-              <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleChangeActiveCard}/>
+              <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.Main} onMouseOver={handleChangeActiveCard}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

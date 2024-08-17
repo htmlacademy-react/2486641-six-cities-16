@@ -12,13 +12,13 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: MapUrl.MARKER_DEFAULT,
+  iconUrl: MapUrl.MarkerDefault,
   iconSize: [27, 39],
   iconAnchor: [14, 39]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: MapUrl.MARKER_CURRENT,
+  iconUrl: MapUrl.MarkerCurrent,
   iconSize: [27, 39],
   iconAnchor: [14, 39]
 });
@@ -31,7 +31,7 @@ function Map(props: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      map.flyTo([city.location.latitude ?? DefaultLocation.latitude, city.location.longitude ?? DefaultLocation.longitude], city.location.zoom);
+      map.flyTo([city.location.latitude ?? DefaultLocation.Latitude, city.location.longitude ?? DefaultLocation.Longitude], city.location.zoom);
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({

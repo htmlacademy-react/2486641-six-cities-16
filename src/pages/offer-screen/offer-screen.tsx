@@ -57,7 +57,7 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <BookmarkButton displayMode={BookmarkButtonDisplayMode.offer} isFavorite={offer.isFavorite} offerId={offer.id}/>
+              <BookmarkButton displayMode={BookmarkButtonDisplayMode.Offer} isFavorite={offer.isFavorite} offerId={offer.id}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
@@ -131,7 +131,7 @@ function OfferScreen(): JSX.Element {
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <PlaceList displayMode={CardDisplayMode.near} offers={nearOffers}/>
+          <PlaceList displayMode={CardDisplayMode.Near} offers={nearOffers}/>
         </section>
       </div>
     </main>

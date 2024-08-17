@@ -15,14 +15,14 @@ function Layout({authStatus}: LayoutProps): JSX.Element {
   let pageClass = 'page ';
   switch (currentPage) {
     case AppRoute.Main:
-      pageClass += PageClass.main;
+      pageClass += PageClass.Main;
       break;
     case AppRoute.Login:
-      pageClass += PageClass.login;
+      pageClass += PageClass.Login;
       break;
     case AppRoute.Favorites:
       if (!favorites.length){
-        pageClass += PageClass.favoritesEmpty;
+        pageClass += PageClass.FavoritesEmpty;
       }
       break;
   }
@@ -34,7 +34,7 @@ function Layout({authStatus}: LayoutProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo displayMode={LogoDisplayMode.header}/>
+              <Logo displayMode={LogoDisplayMode.Header}/>
             </div>
             {(currentPage === AppRoute.Login as string) ? '' : <UserNav authStatus={authStatus}/>}
           </div>
