@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { Comment } from '../../types/types';
+import { calcStarsWidthPercent } from '../../utils/utils';
 
 type ReviewItemProps = {
   comment: Comment;
@@ -18,15 +20,14 @@ function ReviewItem({comment}: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${comment.rating * 20}%`}}></span>
+            <span style={{width: calcStarsWidthPercent(comment.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {comment.comment}
         </p>
-        {/* TODO: Преобразовать дату в нужные форматы */}
-        <time className="reviews__time" dateTime={comment.date}>{comment.date}</time>
+        <time className="reviews__time" dateTime={comment.date}>{dayjs(comment.date).format('MMMM YYYY')}</time>
       </div>
     </li>
   );

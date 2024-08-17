@@ -16,7 +16,7 @@ import EmptyOffers from '../../components/empty-offers/empty-offers';
 function MainScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCity);
-  const [activeSort, setSort] = useState(Sort.popular);
+  const [activeSort, setSort] = useState(Sort.Popular);
   const handleChangeSort = useCallback((sort: Sort) => {
     setSort(sort);
   }, []);
@@ -27,9 +27,9 @@ function MainScreen(): JSX.Element {
   }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
-  const cities = Object.entries(Cities).map((item) => item[1]);
+  const cities = Object.values(Cities).map((item) => item);
   return (
-    <main className="page__main page__main--index">
+    <main className={`page__main page__main--index ${(filteredOffers.length) ? '' : 'page__main--index-empty'}`}>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
@@ -42,13 +42,17 @@ function MainScreen(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredOffers.length} places to stay in {activeCity?.name}</b>
+              <b className="places__found">
+                {`${filteredOffers.length} ${(filteredOffers.length === 1) ? 'place' : 'places'} to stay in ${activeCity?.name}`}
+              </b>
               <PlacesSorting activeSort={activeSort} onChangeSort={handleChangeSort}/>
-              <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.city} onMouseOver={handleChangeActiveCard}/>
+              <PlaceList offers={filteredOffers} displayMode={CardDisplayMode.Main} onMouseOver={handleChangeActiveCard}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                {<Map city={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />}
+                {(filteredOffers.length)
+                  ? <Map city={activeCity} offers={filteredOffers} selectedOffer={activeCard || undefined} />
+                  : ''}
               </section>
             </div>
           </div>

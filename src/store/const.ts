@@ -1,3 +1,5 @@
+import { Cities } from './city/const';
+
 export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
@@ -12,5 +14,6 @@ export enum NameSpace {
   Offers = 'OFFERS',
   City = 'CITY',
   Comments = 'COMMENTS',
-  Favorites = 'FAVORITES',
 }
+
+export const DefaultCity = Cities['Paris'];

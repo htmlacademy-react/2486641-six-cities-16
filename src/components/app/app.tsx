@@ -5,7 +5,7 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import NoAuthRoute from '../no-auth-route/no-auth-route';
 import Layout from '../layout/layout';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -13,9 +13,14 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/offers/selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
+import { fetchFavoritesAction } from '../../store/offers/thunks';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
   const authStatus: AuthorizationStatus = useAppSelector(getAuthorizationStatus);
+  if (authStatus === AuthorizationStatus.Auth) {
+    dispatch(fetchFavoritesAction());
+  }
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
   if (isOffersDataLoading) {

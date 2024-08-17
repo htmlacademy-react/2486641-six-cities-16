@@ -39,8 +39,6 @@ export type OfferInfo = Omit<Offer, 'previewImage'> & {
   maxAdults: number;
 }
 
-export type OffersInfo = OfferInfo[]
-
 type User = {
   name: string;
   avatarUrl: string;

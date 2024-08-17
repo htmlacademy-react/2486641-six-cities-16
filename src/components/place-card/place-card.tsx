@@ -4,6 +4,7 @@ import PremiumMark from '../premium-mark/premium-mark';
 import { AppRoute, BookmarkButtonDisplayMode, CardDisplayMode, CardSettings } from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { memo } from 'react';
+import { calcStarsWidthPercent, ucFirst } from '../../utils/utils';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -32,18 +33,18 @@ function PlaceCardComponent({offer, onMouseOver, displayMode}: PlaceCardProps): 
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton displayMode={BookmarkButtonDisplayMode.placeCard} isFavorite={offer.isFavorite} offerId={offer.id}/>
+          <BookmarkButton displayMode={BookmarkButtonDisplayMode.PlaceCard} isFavorite={offer.isFavorite} offerId={offer.id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${offer.rating * 20}%`}}></span>
+            <span style={{width: calcStarsWidthPercent(offer.rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <Link to={linkToOffer}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{ucFirst(offer.type)}</p>
       </div>
     </article>
   );

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
-import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
+import { AppSettings, AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
@@ -13,6 +13,7 @@ import { getAuthorizationStatus } from '../../store/user/selectors.ts';
 import { getNearOffers, getOffersInfo } from '../../store/offers/selectors.ts';
 import { fetchComments } from '../../store/comments/thunks.ts';
 import { getComments } from '../../store/comments/selectors.ts';
+import { calcStarsWidthPercent, ucFirst } from '../../utils/utils.ts';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -24,7 +25,7 @@ function OfferScreen(): JSX.Element {
     dispatch(fetchComments(id));
   }, [dispatch, id]);
   const offer = useAppSelector(getOffersInfo);
-  const nearOffers = useAppSelector(getNearOffers).slice(-3);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, AppSettings.NearOffersCount);
   const comments = useAppSelector(getComments);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,7 +40,7 @@ function OfferScreen(): JSX.Element {
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {offer.images.map((image) => (
+            {offer.images.slice(0, AppSettings.OfferImageCount).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img className="offer__image" src={image} alt="Photo studio"></img>
               </div>
@@ -56,27 +57,24 @@ function OfferScreen(): JSX.Element {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <BookmarkButton displayMode={BookmarkButtonDisplayMode.offer} isFavorite={offer.isFavorite} offerId={offer.id}/>
+              <BookmarkButton displayMode={BookmarkButtonDisplayMode.Offer} isFavorite={offer.isFavorite} offerId={offer.id}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{width: `${(offer.rating) ? offer.rating * 20 : 0}%`}}></span>
+                <span style={{width: calcStarsWidthPercent(offer.rating)}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{offer.rating}</span>
             </div>
             <ul className="offer__features">
               <li className="offer__feature offer__feature--entire">
-                {/* TODO: С заглавной буквы */}
-                {offer.type}
+                {ucFirst(offer.type)}
               </li>
               <li className="offer__feature offer__feature--bedrooms">
-                {/* TODO: Bedroom/Bedrooms */}
-                {offer.bedrooms} Bedrooms
+                {`${offer.bedrooms} ${(offer.bedrooms === 1) ? 'Bedroom' : 'Bedrooms'}`}
               </li>
               <li className="offer__feature offer__feature--adults">
-                {/* TODO: adult/adults */}
-                  Max {offer.maxAdults} adults
+                {`Max ${offer.maxAdults} ${(offer.maxAdults === 1) ? 'adult' : 'adults'}`}
               </li>
             </ul>
             <div className="offer__price">
@@ -133,7 +131,7 @@ function OfferScreen(): JSX.Element {
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <PlaceList displayMode={CardDisplayMode.near} offers={nearOffers}/>
+          <PlaceList displayMode={CardDisplayMode.Near} offers={nearOffers}/>
         </section>
       </div>
     </main>

@@ -1,3 +1,4 @@
+import { Cities } from '../store/city/const';
 import { Offer, Offers } from '../types/types';
 
 export const getOffersGroupByCity = (offers: Offers) =>
@@ -11,3 +12,17 @@ export const getOffersGroupByCity = (offers: Offers) =>
     // Возвращение объекта для следующего шага
     return result;
   }, {});
+
+const getRandomInt = (max: number) => Math.floor(Math.random() * max);
+
+export const getRandomCity = () => Object.values(Cities)[getRandomInt(Object.values(Cities).length)];
+
+export const ucFirst = (str: string) => {
+  if (!str) {
+    return str;
+  }
+
+  return str[0].toUpperCase() + str.slice(1);
+};
+
+export const calcStarsWidthPercent = (rating: number): string => `${Math.round(rating * 2) * 10}%`;

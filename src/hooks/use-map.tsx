@@ -14,14 +14,14 @@ function useMap(
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city?.location.latitude ?? DefaultLocation.latitude,
-          lng: city?.location.longitude ?? DefaultLocation.longitude
+          lat: city?.location.latitude ?? DefaultLocation.Latitude,
+          lng: city?.location.longitude ?? DefaultLocation.Longitude
         },
         zoom: 10,
       });
 
       const layer = new TileLayer(
-        MapUrl.TEMPLATE,
+        MapUrl.Template,
         {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
