@@ -21,7 +21,7 @@ function LoginScreen(): JSX.Element {
       }));
     }
   };
-  const randomCity = Object.values(Cities)[getRandomInt(6)];
+  const randomCity = Object.values(Cities)[getRandomInt(Object.values(Cities).length)];
   return(
     <main className="page__main page__main--login">
       <div className="page__login-container container">

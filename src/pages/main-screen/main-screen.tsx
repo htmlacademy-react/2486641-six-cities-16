@@ -27,7 +27,7 @@ function MainScreen(): JSX.Element {
   }, []);
   const handleSelectCity = (city: City) => dispatch(changeCity({city: city}));
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name).sort(SortRules[activeSort]);
-  const cities = Object.entries(Cities).map((item) => item[1]);
+  const cities = Object.values(Cities).map((item) => item);
   return (
     <main className={`page__main page__main--index ${(filteredOffers.length) ? '' : 'page__main--index-empty'}`}>
       <h1 className="visually-hidden">Cities</h1>

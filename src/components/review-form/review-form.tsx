@@ -1,5 +1,5 @@
 import { FormEvent, Fragment, useState } from 'react';
-import { DEFAULT_RATING, Stars } from '../../const';
+import { AppSettings, Stars } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData, Offer } from '../../types/types';
 import { postComment } from '../../store/comments/thunks';
@@ -11,7 +11,8 @@ type ReviewFormProps = {
 
 function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const [review, setReview] = useState<CommentData>({rating: DEFAULT_RATING, comment: '', offerId: offerId});
+  const defaultReview = {rating: AppSettings.DefaultRating, comment: '', offerId: offerId};
+  const [review, setReview] = useState<CommentData>(defaultReview);
   const onRatingChange = (evt: React.FormEvent): void => {
     if (evt.target instanceof HTMLInputElement) {
       setReview({...review, rating: Number(evt.target.value)});
@@ -25,7 +26,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
       dispatch(postComment(review))
         .unwrap()
         .then(() => {
-          setReview({...review, comment: '', rating: DEFAULT_RATING});
+          setReview({...review, ...defaultReview});
         });
     }
   };

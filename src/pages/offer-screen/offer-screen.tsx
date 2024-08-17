@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
-import { AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode, OFFER_IMAGE_COUNT } from '../../const.ts';
+import { AppSettings, AuthorizationStatus, BookmarkButtonDisplayMode, CardDisplayMode } from '../../const.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import PlaceList from '../../components/place-list/place-list.tsx';
 import Map from '../../components/map/map.tsx';
@@ -25,7 +25,7 @@ function OfferScreen(): JSX.Element {
     dispatch(fetchComments(id));
   }, [dispatch, id]);
   const offer = useAppSelector(getOffersInfo);
-  const nearOffers = useAppSelector(getNearOffers).slice(-3);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, AppSettings.NearOffersCount);
   const comments = useAppSelector(getComments);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,7 +40,7 @@ function OfferScreen(): JSX.Element {
       <section className="offer">
         <div className="offer__gallery-container container">
           <div className="offer__gallery">
-            {offer.images.slice(0, OFFER_IMAGE_COUNT).map((image) => (
+            {offer.images.slice(0, AppSettings.OfferImageCount).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img className="offer__image" src={image} alt="Photo studio"></img>
               </div>

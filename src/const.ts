@@ -144,8 +144,9 @@ export const PageClass = {
 
 export const PASSWORD_PATTERN = '^(?=.*[0-9])(?=.*[A-Za-z]).*$';
 
-export const OFFER_IMAGE_COUNT = 6;
-
-export const OFFER_COMMENTS_COUNT = 10;
-
-export const DEFAULT_RATING = 0;
+export enum AppSettings {
+  OfferImageCount = 6,
+  OfferCommentsCount = 10,
+  DefaultRating = 0,
+  NearOffersCount = 3,
+}
