@@ -36,7 +36,7 @@ function Layout({authStatus}: LayoutProps): JSX.Element {
             <div className="header__left">
               <Logo displayMode={LogoDisplayMode.Header}/>
             </div>
-            {(currentPage === AppRoute.Login as string) ? '' : <UserNav authStatus={authStatus}/>}
+            {(currentPage === AppRoute.Login as string) ? '' : <UserNav authStatus={authStatus} favorites={favorites}/>}
           </div>
         </div>
       </header>

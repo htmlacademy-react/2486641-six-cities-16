@@ -3,15 +3,15 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getUser } from '../../store/user/selectors';
 import { logoutAction } from '../../store/user/thunks';
-import { getFavorites } from '../../store/offers/selectors';
+import { Offers } from '../../types/types';
 
 type UserNavProps = {
   authStatus: AuthorizationStatus;
+  favorites: Offers;
 }
 
-function UserNav({authStatus}: UserNavProps): JSX.Element {
+function UserNav({authStatus, favorites}: UserNavProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const favorites = useAppSelector(getFavorites);
   const user = useAppSelector(getUser);
   return (
     <nav className="header__nav">
