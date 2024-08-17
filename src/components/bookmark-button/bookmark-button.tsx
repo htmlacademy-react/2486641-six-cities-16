@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, BookmarkButtonDisplayMode, BookmarkButtonSettings } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoritesAction, postFavoriteAction } from '../../store/favorites/thunks';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { postFavoriteAction } from '../../store/offers/thunks';
 
 type BookmarkButtonProps = {
   isFavorite: boolean;
@@ -24,7 +24,7 @@ function BookmarkButton({displayMode, isFavorite, offerId}: BookmarkButtonProps)
           navigate(AppRoute.Login);
         } else {
           dispatch(postFavoriteAction({offerId, isFavorite: !isFavorite}));
-          dispatch(fetchFavoritesAction());
+          //dispatch(fetchFavoritesAction());
         }
       }}
     >

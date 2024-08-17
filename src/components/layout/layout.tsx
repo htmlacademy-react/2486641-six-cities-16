@@ -3,7 +3,7 @@ import Logo from '../logo/logo';
 import { AppRoute, AuthorizationStatus, LogoDisplayMode, PageClass } from '../../const';
 import UserNav from '../user-nav/user-nav';
 import { useAppSelector } from '../../hooks';
-import { getFavorites } from '../../store/favorites/selectors';
+import { getFavorites } from '../../store/offers/selectors';
 
 type LayoutProps = {
   authStatus: AuthorizationStatus;

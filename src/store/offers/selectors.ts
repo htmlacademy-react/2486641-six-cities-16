@@ -7,3 +7,4 @@ export const getOffersDataLoadingStatus = (state: State): boolean => state[NameS
 export const getErrorStatus = (state: State): boolean => state[NameSpace.Offers].hasError;
 export const getNearOffers = (state: State): Offers => state[NameSpace.Offers].nearOffers;
 export const getOffersInfo = (state: State): OfferInfo | undefined => state[NameSpace.Offers].offerInfo;
+export const getFavorites = (state: State): Offers => state[NameSpace.Offers].favorites;

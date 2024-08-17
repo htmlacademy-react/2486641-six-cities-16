@@ -6,7 +6,7 @@ import { APIRoute } from '../const';
 import { createAPI } from '../../services/api';
 import { State } from '../../types/state';
 import { AppThunkDispatch, extractActionsTypes, makeFakeOffer, makeFakeOfferInfo } from '../../utils/mock';
-import { fetchNearOffersAction, fetchOffersAction, getOfferAction } from './thunks';
+import { fetchFavoritesAction, fetchNearOffersAction, fetchOffersAction, getOfferAction } from './thunks';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -19,7 +19,8 @@ describe('Async actions', () => {
     store = mockStoreCreator({
       OFFERS: {
         offers: [],
-        offerInfo: undefined
+        offerInfo: undefined,
+        favorites: []
       }
     });
   });
@@ -112,21 +113,26 @@ describe('Async actions', () => {
 
       expect(fetchNearOffersActionFulfilled.payload).toEqual(mockNearOffers);
     });
+  });
 
-    //   it('should dispatch "fetchNearOffersAction.pending", "fetchNearOffersAction.rejected", when server response 400', async() => {
-    //     mockAxiosAdapter.onGet(APIRoute.Offers).reply(400, []);
+  describe('fetchFavoritesAction', () => {
+    it('should dispatch "fetchFavoritesAction.pending", "fetchFavoritesAction.fulfilled", when server response 200', async() => {
+      const mockOffers = [makeFakeOffer()];
+      mockAxiosAdapter.onGet(APIRoute.Favorite).reply(200, mockOffers);
 
-    //     await store.dispatch(fetchNearOffersAction());
+      await store.dispatch(fetchFavoritesAction());
 
-    //     const emittedActions = store.getActions();
-    //     const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFavoritesActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFavoritesAction.fulfilled>;
 
-    //     expect(extractedActionsTypes).toEqual([
-    //       fetchNearOffersAction.pending.type,
-    //       fetchNearOffersAction.rejected.type,
-    //     ]);
+      expect(extractedActionsTypes).toEqual([
+        fetchFavoritesAction.pending.type,
+        fetchFavoritesAction.fulfilled.type,
+      ]);
 
-  //   });
+      expect(fetchFavoritesActionFulfilled.payload).toEqual(mockOffers);
+    });
   });
 
 });

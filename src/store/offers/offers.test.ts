@@ -10,6 +10,7 @@ describe('Favorites Slice', () => {
       nearOffers: [makeFakeOffer()],
       isOffersDataLoading: true,
       hasError: true,
+      favorites: [makeFakeOffer()]
     };
 
     const result = offers.reducer(expectedState, emptyAction);

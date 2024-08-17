@@ -13,7 +13,7 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/offers/selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
-import { fetchFavoritesAction } from '../../store/favorites/thunks';
+import { fetchFavoritesAction } from '../../store/offers/thunks';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
