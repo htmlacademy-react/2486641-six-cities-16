@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from '../../const';
 import { user } from './user';
 
-describe('Favorites Slice', () => {
+describe('User Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {
