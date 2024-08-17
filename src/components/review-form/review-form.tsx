@@ -39,7 +39,6 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
             <input
               className="form__rating-input visually-hidden"
               name="rating"
-              // TODO: получать значение рейтинга из state
               value={star.value}
               id={`${star.value}-stars`}
               type="radio"

@@ -71,12 +71,10 @@ function OfferScreen(): JSX.Element {
                 {ucFirst(offer.type)}
               </li>
               <li className="offer__feature offer__feature--bedrooms">
-                {/* TODO: Bedroom/Bedrooms */}
-                {offer.bedrooms} Bedrooms
+                {`${offer.bedrooms} ${(offer.bedrooms === 1) ? 'Bedroom' : 'Bedrooms'}`}
               </li>
               <li className="offer__feature offer__feature--adults">
-                {/* TODO: adult/adults */}
-                  Max {offer.maxAdults} adults
+                {`Max ${offer.maxAdults} ${(offer.maxAdults === 1) ? 'adult' : 'adults'}`}
               </li>
             </ul>
             <div className="offer__price">
