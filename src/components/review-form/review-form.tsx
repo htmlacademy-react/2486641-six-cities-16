@@ -2,7 +2,7 @@ import { FormEvent, Fragment, useState } from 'react';
 import { AppSettings, Stars } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData, Offer } from '../../types/types';
-import { postComment } from '../../store/comments/thunks';
+import { postCommentAction } from '../../store/comments/thunks';
 import { getPostingStatus } from '../../store/comments/selectors';
 
 type ReviewFormProps = {
@@ -23,7 +23,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
     evt.preventDefault();
 
     if (review.rating !== null && review.comment !== null) {
-      dispatch(postComment(review))
+      dispatch(postCommentAction(review))
         .unwrap()
         .then(() => {
           setReview({...review, ...defaultReview});

@@ -11,7 +11,7 @@ import { fetchNearOffersAction, getOfferAction } from '../../store/offers/thunks
 import { useEffect } from 'react';
 import { getAuthorizationStatus } from '../../store/user/selectors.ts';
 import { getNearOffers, getOffersInfo } from '../../store/offers/selectors.ts';
-import { fetchComments } from '../../store/comments/thunks.ts';
+import { fetchCommentsAction } from '../../store/comments/thunks.ts';
 import { getComments } from '../../store/comments/selectors.ts';
 import { calcStarsWidthPercent, ucFirst } from '../../utils/utils.ts';
 
@@ -22,7 +22,7 @@ function OfferScreen(): JSX.Element {
   useEffect(() => {
     dispatch(getOfferAction(id));
     dispatch(fetchNearOffersAction(id));
-    dispatch(fetchComments(id));
+    dispatch(fetchCommentsAction(id));
   }, [dispatch, id]);
   const offer = useAppSelector(getOffersInfo);
   const nearOffers = useAppSelector(getNearOffers).slice(0, AppSettings.NearOffersCount);

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Comments } from '../../types/types';
 import { NameSpace } from '../const';
-import { fetchComments, postComment } from './thunks';
+import { fetchCommentsAction, postCommentAction } from './thunks';
 
 
 type InitialState = {
@@ -19,16 +19,16 @@ export const comments = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchComments.fulfilled, (state, action) => {
+      .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
       })
-      .addCase(postComment.pending, (state) => {
+      .addCase(postCommentAction.pending, (state) => {
         state.isPostingComment = true;
       })
-      .addCase(postComment.rejected, (state) => {
+      .addCase(postCommentAction.rejected, (state) => {
         state.isPostingComment = false;
       })
-      .addCase(postComment.fulfilled, (state, action) => {
+      .addCase(postCommentAction.fulfilled, (state, action) => {
         state.comments.push(action.payload);
         state.isPostingComment = false;
       });
