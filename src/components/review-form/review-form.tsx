@@ -79,7 +79,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!(review.rating > 0 && review.comment.length > 50 && review.comment.length < 300 && !isPosting)}
+          disabled={!(review.rating > 0 && review.comment.length > 50 && review.comment.length <= 300 && !isPosting)}
         >
           Submit
         </button>
