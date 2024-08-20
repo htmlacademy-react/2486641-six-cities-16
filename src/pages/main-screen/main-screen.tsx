@@ -36,7 +36,7 @@ function MainScreen(): JSX.Element {
           <CityList activeCity={activeCity} cities={cities} onSelectCity={handleSelectCity}/>
         </section>
       </div>
-      {offers.length
+      {filteredOffers.length
         ?
         <div className="cities">
           <div className="cities__places-container container">

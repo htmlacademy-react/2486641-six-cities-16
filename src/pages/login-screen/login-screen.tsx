@@ -36,6 +36,7 @@ function LoginScreen(): JSX.Element {
                 placeholder="Email"
                 required
                 ref={loginRef}
+                data-testid="loginElement"
               >
               </input>
             </div>
@@ -50,6 +51,7 @@ function LoginScreen(): JSX.Element {
                 ref={passwordRef}
                 pattern={PASSWORD_PATTERN}
                 title="Пароль должен состоять минимум из одной буквы и цифры"
+                data-testid="passwordElement"
               >
               </input>
             </div>

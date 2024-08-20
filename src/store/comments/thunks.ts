@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 
-export const fetchComments = createAsyncThunk<Comments, string | undefined, {
+export const fetchCommentsAction = createAsyncThunk<Comments, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -19,7 +19,7 @@ export const fetchComments = createAsyncThunk<Comments, string | undefined, {
   },
 );
 
-export const postComment = createAsyncThunk<Comment, CommentData, {
+export const postCommentAction = createAsyncThunk<Comment, CommentData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
